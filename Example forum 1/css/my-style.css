@@ -1,0 +1,148 @@
+body {
+    background-color: #666666;
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    /* make sure IE centers the page too */
+}
+.green{
+    color: #00ff00;
+}
+.red {
+    color: #FF0000;
+}
+#wrapper {
+    width: 900px;
+    margin: 0 auto;             /* center the page */
+}
+.collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.active, .collapsible:hover {
+    background-color: #555;
+}
+
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+#content {
+    background-color: #FFFFFF;
+    border: 1px solid #000;
+    float: left;
+    padding: 20px 30px;
+    text-align: left;
+    width: 100%;                /* fill up the entire div */
+}
+#content h1{
+    color: black;
+}
+
+#menu {
+    float: left;
+    border: 1px solid #000;
+    border-bottom: none;        /* avoid a double border */
+    clear: both;                /* clear:both makes sure the content div doesn't float next to this one but stays under it */
+    width:100%;
+    height:20px;
+    padding: 0 30px;
+    background-color: #FFF;
+    text-align: left;
+    font-size: 85%;
+}
+
+#menu a:hover {
+    background-color: #009FC1;
+}
+
+@media (min-width: 979px) {
+    ul.nav li.dropdown:hover > ul.dropdown-menu {
+        display: block;
+    }
+}
+#footer {
+    clear: both;
+}
+
+/* begin table styles */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table a {
+    color: #000;
+}
+
+table a:hover {
+    color:#373737;
+    text-decoration: none;
+}
+
+th {
+    background-color: #B40E1F;
+    color: #F0F0F0;
+}
+
+td {
+    padding: 5px;
+}
+
+/* Begin font styles */
+h1, #footer {
+    color: #F1F3F1;
+}
+
+h3 {margin: 0; padding: 0;}
+
+/* Menu styles */
+.item {
+    background-color: #00728B;
+    border: 1px solid #032472;
+    color: #FFF;
+    padding: 3px;
+    text-decoration: none;
+}
+
+.leftpart {
+    width: 70%;
+}
+
+.rightpart {
+    width: 30%;
+}
+
+.small {
+    font-size: 75%;
+    color: #373737;
+}
+#footer {
+    margin_top: 20px;
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+}
+
+.topic-post {
+    height: 100px;
+    overflow: auto;
+}
+
+.post-content {
+    padding: 30px;
+}
+
+textarea {
+    width: 500px;
+    height: 200px;
+}

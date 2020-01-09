@@ -1,5 +1,11 @@
 <?php
+echo $_SESSION['username'];
 session_start();
 $view = new stdClass();
-$view->pageTitle = 'Homepage';
-require_once('Views/index.phtml');
+if(isset($_SESSION['username'])) {
+    $view->pageTitle = 'Homepage';
+    require_once ('Controller/index.php');
+}
+else{
+    header('Location: sign-in.php');
+}

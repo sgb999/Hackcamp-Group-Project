@@ -22,12 +22,11 @@
 <body>
 <h1>KRM - Timesheet Manager</h1>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm colour navbar-dark">
     <!-- Brand/logo -->
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand">
         <img src="/images/krm-logo-1.png" alt="logo" style="width:100px;">
     </a>
-
     <!-- Links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -36,6 +35,17 @@
         <li class="nav-item">
             <a class="nav-link" href="#">Upload Timesheet</a>
         </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <?php
+        if(isset($_SESSION['user_name']))
+        {
+            //echo 'Hello '. $_SESSION['user_name'];?>
+            <li><a href="../../log_out.php"><span class="glyphicon glyphicon-log-out red"></span>Sign out</a></li>
+        <?php }
+        else
+        {?>
+        <?php } ?>
     </ul>
 </nav>
         <div id="content">

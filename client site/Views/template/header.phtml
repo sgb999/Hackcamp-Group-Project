@@ -42,7 +42,7 @@
             </li>
         </ul>
         <?php
-        if($has_session = session_status() == PHP_SESSION_ACTIVE) // checks for active session
+        if(isset($_SESSION['userID'])) // checks for active session
         {
             if ($_SESSION['userLevel'] == 1) //checks if user is admin
             {

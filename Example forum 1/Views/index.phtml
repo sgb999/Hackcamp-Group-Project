@@ -1,9 +1,15 @@
 <?php require('template/header.phtml') ?>
 <h3><?php echo 'Hello '. $_SESSION['username'];?></h3>
-<h4>My Projects</h4>
-<?php
-$MySQL = $view->MySQL;
-foreach ($MySQL = $view as $project) {?>
-    <tr><td><h3><a href="/get_project.php?projectID=<?php echo $project->getCname()?>"><?php echo $project->getCname();?></h3></td></tr></a>
-<?php}
-require('template/footer.phtml')?>
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <thead>
+    <tr><th><h1>My Projects</h1></th></tr>
+    </thead>
+    <tbody>
+    <?php
+    $MySQL = $view->MySQL;
+    foreach ($MySQL as $projects){?>
+        <tr><td><h3><a href="/get_project.php?cat_id=<?php echo $projects->getCname()?>"><?php echo $projects->getCName();?></h3></td></tr></a>
+    <?php }?>
+</tbody>
+</form>
+<?php require('template/footer.phtml')?>

@@ -1,16 +1,24 @@
 <?php
+require_once('Models/MySQL.php');
+require 'validation.php';
+    if (isset($_POST['submit'])) {
+        if (validate_length($_POST['user_name'], 3, 20) && validate_length($_POST['user_pass'], 8, 255) && validate_email($_POST['user_email'])) {
+            if (isset($_POST['submit']))
+            {
+                $MySQL = new MySQL(); // creates a MySQL class object
+                $result = $MySQL->addUser($_POST['username'], $_POST['pass'], $_POST['email']); // passes data to the addUser method
+                if (!$result) {
+                    echo 'something went wrong while registering. Please try again later.';
+                }
+                else
+                {
+                    echo 'user successfully added';
+                }
+            }
+            require_once('Views/sign-up.phtml');
 
-if (isset($_POST['submit'])) {
-
-  require 'validation.php';
-
-  if (validate_length($user_name, 3, 20) && validate_length($user_pass, 8, 255) && validate_email($user_email)) {
-    // Insert user into database
-    // Log user in
-  } else {
-    // Report error
-  }
-
-} else {
-  header('Location: /');
+    }
+        else {
+        header('Location: /');
+    }
 }

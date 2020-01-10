@@ -32,7 +32,7 @@
     <div class="collapse navbar-collapse" id="navb">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">Link</a>
+                <a class="nav-link" href="javascript:void(0)">Create a project</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="javascript:void(0)">Link</a>
@@ -41,18 +41,24 @@
                 <a class="nav-link disabled" href="javascript:void(0)">Disabled</a>
             </li>
         </ul>
-       <?php if($_SESSION['user_level'] == 1) //checks if user is admin
-        {
-
-        }?>
         <?php
+        if($has_session = session_status() == PHP_SESSION_ACTIVE) // checks for active session
+        {
+            if ($_SESSION['userLevel'] == 1) //checks if user is admin
+            {
+                ?>
+                <a href="../../sign-up.php">Register a user</a>
+            <?php
+            } else {
+            }
+        }
         if(isset($_SESSION['username']))
         {?>
             <a href="../../log_out.php"><span class="glyphicon glyphicon-log-out red"></span>Sign out</a>
         <?php }
         else
-        {?>
-        <?php } ?>
+        {
+         } ?>
     </div>
 </nav>
         <div id="content">

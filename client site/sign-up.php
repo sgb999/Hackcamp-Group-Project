@@ -1,5 +1,11 @@
 <?php
-$view = new stdClass();
-$view->pageTitle = 'Register a user';
 session_start();
-require_once('Controller/sign-up.php');
+$view = new stdClass();
+if ($_SESSION['userLevel'] == 1) //checks if user is admin
+{
+    $view->pageTitle = 'Register a user';
+    require_once('Controller/sign-up.php');
+}
+else{
+    header('Location: index.php');
+}

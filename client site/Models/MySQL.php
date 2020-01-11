@@ -18,7 +18,7 @@ class MySQL
     }
     public function addUser($sqlQuery1, $sqlQuery2, $sqlQuery3, $sqlQuery4, $sqlQuery5, $sqlQuery6)
     {
-        $sqlQuery = "INSERT INTO hackcamp8.users(username, firstName, lastName, email, pass, userLevel, userDate) VALUES('$sqlQuery1', '$sqlQuery2','$sqlQuery3', '$sqlQuery4', sha1('$sqlQuery5'), '$sqlQuery6', NOW())";
+        $sqlQuery = "INSERT INTO hackcamp8.users(username, firstName, lastName, pass, email, userLevel, userDate) VALUES('$sqlQuery1', '$sqlQuery2','$sqlQuery3', sha1('$sqlQuery4'), '$sqlQuery5', '$sqlQuery6', NOW())";
         $statement = $this->_dbConnection->prepare($sqlQuery); // prepare a PDO statement
         $statement->execute(); // execute the PDO statement
         return $statement;

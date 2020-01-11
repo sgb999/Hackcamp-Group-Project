@@ -2,7 +2,7 @@
 require_once ('Models/MySQL.php');
 if (isset($_POST['submit'])) {
     require 'validation.php';
-    if (validate_length($_POST['username'], 3, 20) && validate_length($_POST['pass'], 7, 255)) {
+    if (validate_length($_POST['username'], 5, 20) && validate_length($_POST['pass'], 7, 255)) {
         $userDataSet = new MySQL();
         $logUserIn = $userDataSet->login($_POST['username'],$_POST['pass']);
         if(!$logUserIn)

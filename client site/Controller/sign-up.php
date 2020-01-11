@@ -6,7 +6,7 @@ require 'validation.php';
             {
                 require_once('Models/MySQL.php');
                 $MySQL = new MySQL(); // creates a MySQL class object
-                $result = $MySQL->addUser($_POST['username'], $_POST['firstName'], $_POST['lastName'], $_POST['pass'], $_POST['email'], $_POST['']); // passes data to the addUser method
+                $result = $MySQL->addUser($_POST['username'], $_POST['firstName'], $_POST['lastName'], $_POST['pass'], $_POST['email'], $_POST['optradio']); // passes data to the addUser method
                 if (!$result) {
                     echo 'something went wrong while registering. Please try again later.';
                 }

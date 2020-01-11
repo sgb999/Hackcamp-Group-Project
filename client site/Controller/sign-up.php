@@ -18,7 +18,7 @@ require 'validation.php';
 
     }
         else {
-        echo 'You have entered the incorrect information';
+
     }
 }
-require_once('../Views/sign-up.phtml');
+require_once('Views/sign-up.phtml');

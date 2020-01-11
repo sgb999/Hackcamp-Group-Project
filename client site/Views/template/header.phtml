@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <?php if(!$has_session = session_status() == PHP_SESSION_ACTIVE)
     {
-    session_start();
+        session_start();
     }
     ?>
     <!-- Bootstrap core CSS -->
@@ -31,35 +31,30 @@
     </button>
     <div class="collapse navbar-collapse" id="navb">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">Create a project</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="javascript:void(0)">Disabled</a>
-            </li>
-        </ul>
-        <?php
-        if(isset($_SESSION['userID'])) // checks for active session
-        {
+            <?php
+            if(isset($_SESSION['userID'])) // checks for active session
+            {
             if ($_SESSION['userLevel'] == 1) //checks if user is admin
             {
-                ?>
-                <a href="../../sign-up.php">Register a user</a>
-            <?php
-            } else {
+            ?>
+            <a href="#" class="nav-item nav-link">Create a Project</a>
+            <a href="#" class="nav-item nav-link">Profile</a>
+            <a href="#" class="nav-item nav-link">Messages</a>
+        </ul>
+        <div>
+                    <a href="../../sign-up.php"><button type="button" class="btn btn-success" data-dismiss="modal"><span class="glyphicon glyphicon-user"></span> Register a user</button></a>
+                        <?php
+                } else {
+                }
             }
-        }
-        if(isset($_SESSION['username']))
-        {?>
-            <a href="../../log_out.php"><span class="glyphicon glyphicon-log-out red"></span>Sign out</a>
-        <?php }
-        else
-        {
-         } ?>
-    </div>
+            if(isset($_SESSION['username']))
+            {?>
+                <a href="../../log_out.php"><button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-log-out"></span> Log Out</button></a>
+            <?php }
+            else
+            {
+            } ?>
+        </div>
+        </div>
 </nav>
-        <div id="content">
-        
+<div id="content">

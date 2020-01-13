@@ -1,0 +1,24 @@
+<?php require('template/header.phtml') ?>
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <div>
+    <label>Project Name:</label>
+    <input required="required" class="form-control" type="text" name="projectName" placeholder="Name Of The Project" value="">
+<?php if (isset($_POST['projectName'])) ?>
+    </div>
+    <div>
+    <label>Client Name:</label>
+    <input required="required" class="form-control" type="text" name="clientName" placeholder="Name Of The Client" value="">
+<?php if (isset($_POST['clientName'])) ?>
+    </div>
+    <div>
+    
+    <label>Add users to project:</label>
+    <input required="required" class="form-control" type="text" name="username" placeholder="username" value="">
+<?php if (isset($_POST['username'])) ?>
+    </div>
+    <p></p>
+    <div>
+        <input type="submit" class="btn btn-primary btn-block" value="submit" name="submit">
+    </div>
+    </form>
+<?php require('template/footer.phtml') ?>

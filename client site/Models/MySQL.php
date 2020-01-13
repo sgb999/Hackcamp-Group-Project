@@ -23,8 +23,15 @@ class MySQL
         $statement->execute(); // execute the PDO statement
         return $statement;
     }
-    public function getMyProject($ID){
-        $sqlQuery = "SELECT * FROM project, client, teams, users  WHERE project.teamID = teams.teamID AND teams.userID = $ID";
+    public function getTeamNumber($ID){
+        $sqlQuery = "SELECT DISTINCT teamNumber FROM teams WHERE userID = $ID";
+        $statement = $this->_dbConnection->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+        $dataSet =  $statement->fetchAll();
+        return $dataSet;
+    }
+    public function getMyProject($Number){
+        $sqlQuery = "SELECT * FROM project, client, teams, users  WHERE project.teamID = $Number";
         $statement = $this->_dbConnection->prepare($sqlQuery); // prepare a PDO statement
         $statement->execute(); // execute the PDO statement
         return $statement;

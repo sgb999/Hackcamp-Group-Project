@@ -23,10 +23,11 @@ class MySQL
         $statement->execute(); // execute the PDO statement
         return $statement;
     }
-    public function getMyProject(){
-        $sqlQuery = "SELECT * FROM project ORDER BY ASC ";
+    public function getMyProject($ID){
+        $sqlQuery = "SELECT * FROM project, client, teams, users  WHERE project.teamID = teams.teamID AND teams.userID = $ID";
         $statement = $this->_dbConnection->prepare($sqlQuery); // prepare a PDO statement
         $statement->execute(); // execute the PDO statement
         return $statement;
     }
 }
+//SELECT teamNumber FROM teams where userID = '$sqlQuery1'

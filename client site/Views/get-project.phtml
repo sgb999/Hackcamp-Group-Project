@@ -1,0 +1,43 @@
+<?php require('template/header.phtml') ?>
+    <h3><?php echo 'Hello '. $_SESSION['username'];?></h3>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <thead>
+        <tr><th><h1>My Projects</h1></th></tr>
+        </thead>
+        <tbody>
+        <button type="button" class="collapsible">Upload Timesheet</button>
+        <div class="content">
+            <div class="form-group">
+        <div class="row d-flex justify-content-center mt-100">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>File Upload</h5>
+                    </div>
+                    <div class="card-block">
+                        <form action="#" class="dropzone dz-clickable">
+                            <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+                        </form>
+                        <div class="text-center m-t-20">
+                            <button class="btn btn-primary">Upload Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+
+        <?php
+       // $MySQL = $view->MySQL;
+         //   foreach ($MySQL as $timesheet) {
+                ?>
+                <tr><td><h3><?php //echo $timesheet['projectName'];?></h3></td></tr>
+                <p></p>
+                <tr><td><?php //echo $timesheet['teamNumber'];?></td></tr>
+                <?php
+            //}
+            ?>
+        </tbody>
+    </form>
+<?php require('template/footer.phtml')?>

@@ -16,7 +16,7 @@ class ExcelTimesheetEntry
         $this->date = $row[0];
         $this->workingHours = $row[1] . $row[2];
         $this->distance = $row[3];
-        $this->distance = $row[4] . $row[5] . $row[6] . $row[7];
+        $this->other = $row[4] . $row[5] . $row[6] . $row[7];
     }
 
     /**

@@ -4,6 +4,9 @@ body {
     font-family: Verdana, sans-serif;
     /* make sure IE centers the page too */
 }
+a {
+    text-decoration: none !important;
+}
 .green{
     color: #00ff00;
 }
@@ -25,11 +28,9 @@ body {
     outline: none;
     font-size: 15px;
 }
-
 .active, .collapsible:hover {
     background-color: #555;
 }
-
 .content {
     padding: 0 18px;
     display: none;
@@ -46,19 +47,6 @@ body {
 }
 #content h1{
     color: black;
-}
-
-#menu {
-    float: left;
-    border: 1px solid #000;
-    border-bottom: none;        /* avoid a double border */
-    clear: both;                /* clear:both makes sure the content div doesn't float next to this one but stays under it */
-    width:100%;
-    height:20px;
-    padding: 0 30px;
-    background-color: #FFF;
-    text-align: left;
-    font-size: 85%;
 }
 .colour{
     background-color: #023A78;
@@ -77,24 +65,7 @@ a:hover:not(.navbar-brand) {
 }
 
 /* begin table styles */
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
 
-table a {
-    color: #000;
-}
-
-table a:hover {
-    color:#373737;
-    text-decoration: none;
-}
-
-th {
-    background-color: #B40E1F;
-    color: #F0F0F0;
-}
 
 td {
     padding: 5px;
@@ -138,3 +109,61 @@ textarea {
     width: 500px;
     height: 200px;
 }
+.mt-100 {
+    margin-top: 10px
+}
+
+.card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 5px 0 rgba(43, 43, 43, .1), 0 11px 6px -7px rgba(43, 43, 43, .1);
+    box-shadow: 0 0 5px 0 rgba(43, 43, 43, .1), 0 11px 6px -7px rgba(43, 43, 43, .1);
+    border: none;
+    margin-bottom: 10px;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out
+}
+
+.card .card-header {
+    background-color: transparent;
+    border-bottom: none;
+    padding: 20px;
+    position: relative
+}
+
+.card .card-header h5:after {
+    content: "";
+    background-color: #d2d2d2;
+    width: 101px;
+    height: 1px;
+    position: absolute;
+    bottom: 6px;
+    left: 20px
+}
+
+.card .card-block {
+    padding: 1.25rem
+}
+
+.dropzone.dz-clickable {
+    cursor: pointer
+}
+.dropzone {
+    min-height: 150px;
+    border: 1px solid rgba(42, 42, 42, 0.05);
+    background: rgba(204, 204, 204, 0.15);
+    padding: 20px;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px 0 rgba(43, 43, 43, 0.1);
+    box-shadow: inset 0 0 5px 0 rgba(43, 43, 43, 0.1)
+}
+.btn-primary,
+.sweet-alert button.confirm,
+.wizard>.actions a {
+    background-color: #4099ff;
+    border-color: #4099ff;
+    color: #fff;
+    cursor: pointer;
+    -webkit-transition: all ease-in .3s;
+    transition: all ease-in .3s
+}
+

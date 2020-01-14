@@ -11,11 +11,10 @@
         <?php
             foreach ($row as $projects) {
                 ?>
-                    <tr><td><h3><a href="/get_project.php?cat_id=<?php echo $projects['teamNumber']?>"><?php echo $projects['projectName'];?></h3></td></tr></a>
+                    <tr><td><h3><a href="/get-project.php?projectID=<?php echo $projects['projectID']?>"><?php echo $projects['projectName'];?></h3></td></tr></a>
                     <p></p>
                     <tr><td><?php echo $projects['clientName'];?></td></tr>
-                    <p></p>
-                    <tr><td><?php echo $projects['teamNumber'];?></td></tr>
+                <p></p>
                 <?php
             }
         ?>        

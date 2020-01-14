@@ -1,18 +1,20 @@
 <?php
-//require_once $_SERVER['DOCUMENT_ROOT'] . 'lib/SimpleXLSX.php';
-
+/*TODO: some errors need fixing:
+    'approvedBy' might need modifying
+*/
 class ExcelTimesheet
 {
     //variables
     protected $xlsx;
     protected $rows;
 
-    protected  $timesheetOf = "";
-    protected  $period = "";
-    protected  $client = "";
+    protected  $timesheetOf;
+    protected  $period;
+    protected  $client;
     protected  $total;
-    protected  $approvedBy = "";
-    protected  $comments = "";
+    protected  $approvedBy;
+    protected  $name;
+    protected  $comments;
     // array of ExcelTimesheetEntries
     protected $timesheetEntries = Array();
 
@@ -33,6 +35,7 @@ class ExcelTimesheet
             $this->setTotal();
             $this->setTimesheetEntry();
             $this->setApprovedBy();
+            $this->setName();
             $this->setComments();
 
         } else { // ask about error handling
@@ -63,7 +66,6 @@ class ExcelTimesheet
                 $out .= $this->rows[$row] [$col];
             }
         }
-        $this->total = $out;
         return $out;
     }
 
@@ -85,16 +87,9 @@ class ExcelTimesheet
         $this->client = $out;
     }
 
-    private function setTotal() {
-        $row = 42 - 1;
-        $col = 1;
-        $total = $this->rows[$row][$col];
-        $this->total = $total;
-    }
-
     private function setTimesheetEntry() {
-        $rowStart = 11 - 1;
-        $rowEnd = 41 - 1;
+        $rowStart = 10 - 1;
+        $rowEnd = 40 - 1;
 
         for($row = $rowStart; $row <= $rowEnd; $row++){
             $timeEnt = new ExcelTimesheetEntry($this->rows[$row]);
@@ -102,9 +97,16 @@ class ExcelTimesheet
         }
     }
 
+    private function setTotal() {
+        $row = 41 - 1;
+        $col = 1;
+        $total = $this->rows[$row][$col];
+        $this->total = $total;
+    }
+
     private function setApprovedBy() {
-        $rowStart = 45 - 1;
-        $rowEnd = 47 - 1;
+        $rowStart = 44 - 1;
+        $rowEnd = 45 - 1;
 
         $firstColumnStart = 1;
         $columnStart = 0;
@@ -115,9 +117,22 @@ class ExcelTimesheet
         $this->approvedBy = $out;
     }
 
+    private function setName() {
+        $rowStart = 46 - 1;
+        $rowEnd = 47 - 1;
+
+        $firstColumnStart = 1;
+        $columnStart = 0;
+        $columnEnd = 2;
+
+        $out = $this->getFieldByBlock($rowStart, $rowEnd, $columnStart, $columnEnd, $firstColumnStart);
+
+        $this->name = $out;
+    }
+
     private function setComments() {
-        $rowStart = 45 - 1;
-        $rowEnd = 50 - 1;
+        $rowStart = 44 - 1;
+        $rowEnd = 47 - 1;
 
         $firstColumnStart = 4;
         $columnStart = 3;
@@ -147,7 +162,7 @@ class ExcelTimesheet
     /**
      * @return string
      */
-    public function getClient(): string
+    public function getClientName(): string
     {
         return $this->client;
     }
@@ -177,11 +192,24 @@ class ExcelTimesheet
     }
 
     /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * @return string
      */
     public function getComments(): string
     {
         return $this->comments;
+    }
+
+    public function getHTML()
+    {
+        $this->xlsx->toHTML();
     }
 
 }

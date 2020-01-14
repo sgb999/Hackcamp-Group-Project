@@ -3,8 +3,6 @@ require_once('Database.php');
 class MySQL
 {
     protected $_dbConnection, $_dbInstance;
-
-
     public function __construct() {
         $this->_dbInstance = Database::getInstance();
         $this->_dbConnection = $this->_dbInstance->getDbConnection();
@@ -24,17 +22,16 @@ class MySQL
         return $statement;
     }
     public function getTeamNumbers($ID){
-        $sqlQuery = "SELECT DISTINCT teamNumber FROM teams WHERE userID = $ID";
+        $sqlQuery = "SELECT  teamNumber FROM teams WHERE userID = $ID";
         $statement = $this->_dbConnection->prepare($sqlQuery); // prepare a PDO statement
         $statement->execute(); // execute the PDO statement
         $dataSet =  $statement->fetchAll();
         return $dataSet;
     }
     public function getMyProject($Number, $userID){
-        $sqlQuery = "SELECT * FROM project, client, teams WHERE project.teamNumber = $Number AND teams.userID = $userID";
+        $sqlQuery = "SELECT projectID, projectName, clientName, teams.teamNumber FROM project, client, teams WHERE project.teamNumber = $Number AND project.teamNumber = teams.teamNumber AND teams.userID = $userID";
         $statement = $this->_dbConnection->prepare($sqlQuery); // prepare a PDO statement
         $statement->execute(); // execute the PDO statement
         return $statement->fetchAll();
     }
 }
-//SELECT teamNumber FROM teams where userID = '$sqlQuery1'

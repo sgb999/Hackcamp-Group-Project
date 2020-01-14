@@ -18,16 +18,16 @@ if (isset($_POST['submit'])) {
       foreach ($xlsx->rows() as $row) {
         // Insert into database
 
-         $row['Timesheet of'];
-         $row['Period'];
-         $row['Client'];
-         $row['Date'];
-         $row['Worked hours'];
-         $row['Travelling distance in km'];
-         $row['Other'];
-         $row['Approved by'];
-         $row['Name'];
-         $row['Comments'];
+        // $row['Timesheet of']
+        // $row['Period']
+        // $row['Client']
+        // $row['Date']
+        // $row['Worked hours']
+        // $row['Travelling distance in km']
+        // $row['Other']
+        // $row['Approved by']
+        // $row['Name']
+        // $row['Comments']
       }
 
       unlink($target);

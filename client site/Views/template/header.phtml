@@ -6,11 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <?php if(!$has_session = session_status() == PHP_SESSION_ACTIVE)
-    {
-        session_start();
-    }
-    ?>
+
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <!-- Bootstrap theme -->
@@ -37,9 +33,7 @@
             if ($_SESSION['userLevel'] == 1) //checks if user is admin
             {
             ?>
-            <a href="#" class="nav-item nav-link">Create a Project</a>
-            <a href="#" class="nav-item nav-link">Profile</a>
-            <a href="#" class="nav-item nav-link">Messages</a>
+            <a href="/create-project.php" class="nav-item nav-link">Create a Project</a>
         </ul>
         <div>
                     <a href="../../sign-up.php"><button type="button" class="btn btn-success" data-dismiss="modal"><span class="glyphicon glyphicon-user"></span> Register a user</button></a>

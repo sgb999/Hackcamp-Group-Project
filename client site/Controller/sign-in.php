@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['userID'] = $logUserIn['userID'];
             $_SESSION['username'] = $logUserIn['username'];
             $_SESSION['userLevel'] = $logUserIn['userLevel'];
-            header("Location: ../index.php");
+            header("Location: /index.php");
         }
     }
 }

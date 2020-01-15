@@ -3,12 +3,14 @@
 
 class Projects
 {
-private $_id, $_Tid, $_Cid, $_Cname;
+private $_id, $_Pname, $_Tnum, $_Cid, $_Cname, $_Pdate;
 
 public function __construct($dbRow)
 {
     $this->_id = $dbRow['projectID'];
-    $this->_Tid = $dbRow['teamID'];
+    $this->_Pname = $dbRow['projectName'];
+    $this->_Tnum = $dbRow['teamNumber'];
+    $this->_Pdate = $dbRow['projectDate'];
     $this->_Cid = $dbRow['clientID'];
     $this->_Cname = $dbRow['clientName'];
 }
@@ -16,9 +18,13 @@ public function __construct($dbRow)
     {
         return $this->_id;
     }
-    public function getTid()
+    public function getPname()
     {
-        return $this->_Tid;
+        return $this->_Pname;
+    }
+    public function getTnum()
+    {
+        return $this->_Tnum;
     }
     public function getCid()
     {
@@ -27,5 +33,9 @@ public function __construct($dbRow)
     public function getCname()
     {
         return $this->_Cname;
+    }
+    public function getPdate()
+    {
+        return $this->_Pdate;
     }
 }

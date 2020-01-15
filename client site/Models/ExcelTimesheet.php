@@ -1,6 +1,8 @@
 <?php
 /*TODO: some errors need fixing:
     'approvedBy' might need modifying
+  NOTE: this version of the class only works with Liam's version of the company excel timesheet
+        if you want another version for the regular one then ask me
 */
 class ExcelTimesheet
 {
@@ -45,6 +47,23 @@ class ExcelTimesheet
         return true;
     }
 
+    // given the numeric part of an excel row
+    private function convertToRow(int $excelRowNumber): int{
+        return $excelRowNumber - 1; // make the index 0-based
+    }
+
+    // given the alphabetical part of an excel column
+    private function convertToColumn(String $excelColumnString): int{
+        $chars[] = str_split($excelColumnString);
+        $tempArr = Array();
+        foreach ($chars as $char){
+            $temp =  ord($char[0]) & 63; //get the character's position in the alphabet
+            $temp -= 1; // make it zero-based
+            array_push($tempArr, $temp);
+        }
+        return array_sum($tempArr);
+    }
+
     //concatenate all columns in a row together
     private function getFieldByRow($row, $colStart, $colEnd){
         $out = "";
@@ -70,8 +89,11 @@ class ExcelTimesheet
     }
 
     private function setTimesheetOf() {
-        $row = 6 - 1; //primary cell is D6
-        $out = $this->getFieldByRow($row, 1, 7);
+        $row = $this->convertToRow(6); //primary cell is D6
+        $colStart = $this->convertToColumn('B');
+        $colEnd = $this->convertToColumn('H');
+
+        $out = $this->getFieldByRow($row, $colStart, $colEnd);
         $this->timesheetOf = $out;
     }
 
@@ -99,7 +121,7 @@ class ExcelTimesheet
 
     private function setTotal() {
         $row = 41 - 1;
-        $col = 1;
+        $col = $this->convertToColumn('B');
         $total = $this->rows[$row][$col];
         $this->total = $total;
     }

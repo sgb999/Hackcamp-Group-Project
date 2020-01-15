@@ -5,15 +5,19 @@
     <input required="required" class="form-control" type="text" name="projectName" placeholder="Name Of The Project" value="">
 <?php if (isset($_POST['projectName'])) ?>
     </div>
+    <p></p>
     <div>
     <label>Client Name:</label>
     <input required="required" class="form-control" type="text" name="clientName" placeholder="Name Of The Client" value="">
 <?php if (isset($_POST['clientName'])) ?>
     </div>
+    <p></p>
     <div>
-    <label>Add users to project:</label>
-    <input required="required" class="form-control" type="text" name="username" placeholder="username" value="">
-<?php if (isset($_POST['username'])) ?>
+    <div class="form-group">
+        <label for="usernames">Usernames:</label>
+        <textarea class="form-control" rows="5" id="usernames" name="usernames"  type="text" placeholder="e.g username1, username2"></textarea>
+    </div>
+<?php if (isset($_POST['usernames'])) ?>
     </div>
     <p></p>
     <div>

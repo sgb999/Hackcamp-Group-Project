@@ -1,7 +1,7 @@
 <?php
 
-require_once ('Model/DataSet.php');
-require_once ('Model/Projects.php');
+require_once ('DataSet.php');
+require_once ('Projects.php');
 
 class projectsDataSet extends DataSet {
 
@@ -53,6 +53,19 @@ class projectsDataSet extends DataSet {
             'FROM hackcamp8.project ' .
             'INNER JOIN hackcamp8.client ON hackcamp8.project.clientID = hackcamp8.client.clientID ' .
             'WHERE hackcamp8.timesheet.teamNumber = ' . $teamNumber. ' ' .
+            'ORDER BY project.projectDate desc';
+
+        $dataSet = $this->fetchQuery($sqlQuery);
+        return current($dataSet);
+    }
+
+    public function fetchDataByTeamNumberAndUserID($teamNumber, $userID) {
+
+        $sqlQuery = 'SELECT project.*, client.clientName ' .
+            'FROM hackcamp8.project ' .
+            'INNER JOIN hackcamp8.client ON hackcamp8.project.clientID = hackcamp8.client.clientID ' .
+            'INNER JOIN hackcamp8.teams ON hackcamp8.project.teamNumber = hackcamp8.teams.teamNumber ' .
+            'WHERE hackcamp8.timesheet.teamNumber = ' . $teamNumber. ' AND teams.userID = ' . $userID . ' ' .
             'ORDER BY project.projectDate desc';
 
         $dataSet = $this->fetchQuery($sqlQuery);

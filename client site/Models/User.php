@@ -33,7 +33,7 @@ class User {
     }
 
     public function getFullName() {
-        return $this->_firstName . $this->_lastName;
+        return $this->_firstName . ' ' . $this->_lastName;
     }
 
     public function getPass() {

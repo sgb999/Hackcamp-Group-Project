@@ -5,13 +5,13 @@
     </thead>
     <tbody>
     <?php
-    $projectsDataSet = $view->MySQL;
-        foreach ($projectsDataSet as $projects) {?>
+    $projectsDataSet = $view->projectsDataSet;
+    foreach ($projectsDataSet as $project){?>
             <hr>
-            <tr><td><h3><a class="projectName" href="/get-project.php?projectID=<?php echo $projectsDataSet['projectID']?>"><?php echo $projectsDataSet['projectName'];?></h3></td></tr></a>
+            <tr><td><h3><a class="projectName" href="/get-project.php?projectID=<?php echo $project->getid()?>"><?php echo $project->getPname();?></h3></td></tr></a>
             <p></p>
-            <tr><td><?php echo $projectsDataSet['clientName'];?></td></tr>
+            <tr><td><?php echo $project->getCname();?></td></tr>
             <p></p>
-            <?php} ?>
+    <?php }?>
     </tbody>
 <?php require('template/footer.phtml')?>

@@ -5,6 +5,18 @@
         <tr><th><h1>My Projects</h1></th></tr>
         </thead>
         <tbody>
+        <button type="button" class="collapsible">View user's in this project</button>
+        <div class="content">
+            <div class="form-group">
+                <p></p>
+                <?php
+                $MySQL = $view->MySQL;
+                foreach ($MySQL as $user){?>
+                    <tr><td><p><?php echo $user->getFirstName(); echo " "; echo $user->getLastName()?></p></td></tr>
+                <?php }?>
+            </div>
+        </div>
+        <p></p>
         <button type="button" class="collapsible">Upload Timesheet</button>
         <div class="content">
             <div class="form-group">

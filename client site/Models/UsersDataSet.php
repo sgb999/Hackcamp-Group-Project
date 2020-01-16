@@ -30,7 +30,7 @@ class UsersDataSet extends DataSet {
             'ORDER BY users.lastName ASC';
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 
     public function fetchDataByProject($projectID)
@@ -44,7 +44,7 @@ class UsersDataSet extends DataSet {
             'ORDER BY users.lastName ASC';
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 }
 

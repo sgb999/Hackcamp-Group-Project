@@ -1,4 +1,5 @@
 <?php require('template/header.phtml') ?>
+
 <h3><?php echo 'Hello '. $_SESSION['username'];?></h3>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <thead>
@@ -7,17 +8,12 @@
     <tbody>
     <?php
     $MySQL = $view->MySQL;
-    foreach ($MySQL as $row){?>
-        <?php
-            foreach ($row as $projects) {
-                ?>
-                    <tr><td><h3><a href="/get-project.php?projectID=<?php echo $projects['projectID']?>"><?php echo $projects['projectName'];?></h3></td></tr></a>
+    foreach ($MySQL as $projects){?>
+                    <tr><td><h3><a href="/get-project.php?projectID=<?php echo $projects->getid()?>"><?php echo $projects->getPname();?></h3></td></tr></a>
                     <p></p>
-                    <tr><td><?php echo $projects['clientName'];?></td></tr>
+                    <tr><td><?php echo $projects->getCname();?></td></tr>
                 <p></p>
-                <?php
-            }
-        ?>        
+
     <?php }?>
 </tbody>
 </form>

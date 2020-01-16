@@ -42,7 +42,7 @@ class MySQL
         return $statement->fetchAll();
     }
     public function checkClient($clientName){
-        $sqlQuery = "SELECT clientID FROM client WHERE clientName = '".$clientName."')";
+        $sqlQuery = "SELECT clientID FROM client WHERE clientName = '".$clientName."'";
         $statement = $this->_dbConnection->prepare($sqlQuery);
         $statement->execute();
         return $statement->fetch();
@@ -58,27 +58,27 @@ class MySQL
         $sqlQuery = "SELECT clientID FROM client WHERE clientName = '$clientName'";
         $statement = $this->_dbConnection->prepare($sqlQuery); // prepare a PDO statement
         $statement->execute(); // execute the PDO statement
-        return $statement;
+        return $statement->fetch();
     }
     public function createTeam($userID, $num){
         $sqlQuery = "INSERT INTO teams(userID, teamNumber) VALUES('$userID', '$num')";
         $statement = $this->_dbConnection->prepare($sqlQuery); // prepare a PDO statement
-        $statement->execute(); // execute the PDO statement
-        return $statement;
+        $success = $statement->execute(); // execute the PDO statement
+        return $success;
     }
 
     public function getUserID($userID){
         $sqlQuery = "SELECT userID FROM hackcamp8.users WHERE username = '$userID'";
         $statement = $this->_dbConnection->prepare($sqlQuery); // prepare a PDO statement
         $statement->execute(); // execute the PDO statement
-        $dataSet =  $statement->fetch();
+        $dataSet =  $statement->fetchAll();
         return $dataSet;
 
     }
     public function createProject($projectName, $clientID, $teamNumber){
         $sqlQuery = "INSERT INTO project(projectName, clientID, teamNumber, projectDate) VALUES('$projectName', '$clientID', '$teamNumber', NOW())";
         $statement = $this->_dbConnection->prepare($sqlQuery); // prepare a PDO statement
-        $statement->execute(); // execute the PDO statement
-        return $statement;
+        $success = $statement->execute(); // execute the PDO statement
+        return $success;
     }
 }

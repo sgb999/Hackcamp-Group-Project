@@ -32,7 +32,7 @@ class DBTimesheetDataSet extends DataSet {
             'WHERE hackcamp8.timesheet.UserID = ' . $userID . ' AND hackcamp8.timesheet.projectID = ' . $projectID;
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 
     public function fetchDataByProject($projectID) {
@@ -44,7 +44,7 @@ class DBTimesheetDataSet extends DataSet {
             'WHERE hackcamp8.timesheet.projectID = ' . $projectID;
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 
     public function fetchDataByUser($userID) {
@@ -56,7 +56,7 @@ class DBTimesheetDataSet extends DataSet {
             'WHERE hackcamp8.timesheet.UserID = ' . $userID;
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 }
 

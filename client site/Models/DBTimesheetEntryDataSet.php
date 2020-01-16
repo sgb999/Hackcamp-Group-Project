@@ -26,7 +26,7 @@ class DBTimesheetEntryDataSet extends DataSet {
             . 'WHERE timesheetEntries.timesheetID = ' . $timesheetID;
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 }
 

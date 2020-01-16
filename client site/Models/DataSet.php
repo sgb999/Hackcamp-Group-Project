@@ -1,6 +1,6 @@
 <?php
 
-require_once ('Model/Database.php');
+require_once ('Database.php');
 
 abstract class DataSet {
     protected $_dbHandle, $_dbInstance;
@@ -17,7 +17,7 @@ abstract class DataSet {
         
         $dataSet = [];
         while ($row = $statement->fetch()) {
-            $dataSet[] = $this->convertToData($row);
+            array_push($dataSet, $this->convertToData($row));
         }
         return $dataSet;
     }

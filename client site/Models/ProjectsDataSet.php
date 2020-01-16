@@ -32,7 +32,7 @@ class projectsDataSet extends DataSet {
             'ORDER BY project.projectDate desc';
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 
     public function fetchDataByProject($projectID) {
@@ -44,7 +44,7 @@ class projectsDataSet extends DataSet {
             'ORDER BY project.projectDate desc';
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 
     public function fetchDataByTeamNumber($teamNumber) {
@@ -56,7 +56,7 @@ class projectsDataSet extends DataSet {
             'ORDER BY project.projectDate desc';
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 
     public function fetchDataByTeamNumberAndUserID($teamNumber, $userID) {
@@ -69,7 +69,20 @@ class projectsDataSet extends DataSet {
             'ORDER BY project.projectDate desc';
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
+    }
+
+    public function fetchDataByUserID($userID) {
+
+        $sqlQuery = 'SELECT project.*, client.clientName ' .
+            'FROM hackcamp8.project ' .
+            'INNER JOIN hackcamp8.client ON hackcamp8.project.clientID = hackcamp8.client.clientID ' .
+            'INNER JOIN hackcamp8.teams ON hackcamp8.project.teamNumber = hackcamp8.teams.teamNumber ' .
+            'WHERE teams.userID = ' . $userID . ' ' .
+            'ORDER BY project.projectDate desc';
+        $dataSet = Array();
+        $dataSet = $this->fetchQuery($sqlQuery);
+        return $dataSet;
     }
 }
 

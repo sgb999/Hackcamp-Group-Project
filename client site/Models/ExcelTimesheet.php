@@ -170,13 +170,14 @@ class ExcelTimesheet
      */
     public function getTimesheetOf(): string
     {
-        return $this->timesheetOf;
+
+        return (string)$this->timesheetOf);
     }
 
     /**
      * @return string
      */
-    public function getPeriod(): string
+    public function getPeriod()
     {
         return $this->period;
     }
@@ -186,7 +187,7 @@ class ExcelTimesheet
      */
     public function getClientName(): string
     {
-        return $this->client;
+        return (string)$this->client;
     }
 
     /**
@@ -202,7 +203,7 @@ class ExcelTimesheet
      */
     public function getTotal(): string
     {
-        return $this->total;
+        return (string)$this->total;
     }
 
     /**
@@ -210,7 +211,7 @@ class ExcelTimesheet
      */
     public function getApprovedBy(): string
     {
-        return $this->approvedBy;
+        return (string)$this->approvedBy;
     }
 
     /**
@@ -218,7 +219,7 @@ class ExcelTimesheet
      */
     public function getName()
     {
-        return $this->name;
+        return (string)$this->name;
     }
 
     /**
@@ -226,7 +227,7 @@ class ExcelTimesheet
      */
     public function getComments(): string
     {
-        return $this->comments;
+        return (string)$this->comments;
     }
 
     public function getHTML()

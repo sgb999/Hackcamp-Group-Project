@@ -1,6 +1,5 @@
 <?php
 require_once('Models/ProjectsDataSet.php');
-$MySQL = new projectsDataSet();
-$allMySQL = $MySQL->fetchAll();
-$view->MySQL = $allMySQL;
+$projectsDataSet = new projectsDataSet();
+$view->projectsDataSet = $projectsDataSet->fetchAll();
 require_once('Views/view-all-projects.phtml');

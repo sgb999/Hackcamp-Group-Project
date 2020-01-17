@@ -1,7 +1,7 @@
 <?php
 
-require_once ('Model/DataSet.php');
-require_once ('Model/Projects.php');
+require_once ('DataSet.php');
+require_once ('Projects.php');
 
 class projectsDataSet extends DataSet {
 
@@ -11,7 +11,7 @@ class projectsDataSet extends DataSet {
 
     // overrides from DataSet
     protected function convertToData($row) {
-        return new $row;
+        return new projects($row);
     }
 
     public function fetchAll() {
@@ -98,5 +98,3 @@ class projectsDataSet extends DataSet {
         return $dataSet;
     }
 }
-
-

@@ -11,7 +11,7 @@ class projectsDataSet extends DataSet {
 
     // overrides from DataSet
     protected function convertToData($row) {
-        return new projects($row);
+        return new $row;
     }
 
     public function fetchAll() {
@@ -32,7 +32,7 @@ class projectsDataSet extends DataSet {
             'ORDER BY project.projectDate desc';
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 
     public function fetchDataByProject($projectID) {
@@ -44,7 +44,7 @@ class projectsDataSet extends DataSet {
             'ORDER BY project.projectDate desc';
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 
     public function fetchDataByTeamNumber($teamNumber) {
@@ -56,7 +56,7 @@ class projectsDataSet extends DataSet {
             'ORDER BY project.projectDate desc';
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 
     public function fetchDataByTeamNumberAndUserID($teamNumber, $userID) {
@@ -69,7 +69,7 @@ class projectsDataSet extends DataSet {
             'ORDER BY project.projectDate desc';
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 
     public function fetchDataByUserID($userID) {
@@ -82,7 +82,7 @@ class projectsDataSet extends DataSet {
             'ORDER BY project.projectDate desc';
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 
     public function insertTeamNumberAndUserID($teamNumber, $userID) {
@@ -95,7 +95,7 @@ class projectsDataSet extends DataSet {
             'ORDER BY project.projectDate desc';
 
         $dataSet = $this->fetchQuery($sqlQuery);
-        return current($dataSet);
+        return $dataSet;
     }
 }
 

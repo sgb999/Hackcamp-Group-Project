@@ -171,7 +171,7 @@ class ExcelTimesheet
     public function getTimesheetOf(): string
     {
 
-        return (string)$this->timesheetOf);
+        return (string)$this->timesheetOf;
     }
 
     /**

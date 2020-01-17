@@ -72,6 +72,19 @@ class projectsDataSet extends DataSet {
         return current($dataSet);
     }
 
+    public function fetchDataByUserID($userID) {
+
+        $sqlQuery = 'SELECT project.*, client.clientName ' .
+            'FROM hackcamp8.project ' .
+            'INNER JOIN hackcamp8.client ON hackcamp8.project.clientID = hackcamp8.client.clientID ' .
+            'INNER JOIN hackcamp8.teams ON hackcamp8.project.teamNumber = hackcamp8.teams.teamNumber ' .
+            'WHERE teams.userID = ' . $userID . ' ' .
+            'ORDER BY project.projectDate desc';
+
+        $dataSet = $this->fetchQuery($sqlQuery);
+        return current($dataSet);
+    }
+
     public function insertTeamNumberAndUserID($teamNumber, $userID) {
 
         $sqlQuery = 'INSERT INTO project() ' .

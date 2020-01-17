@@ -58,6 +58,11 @@ class DBTimesheetDataSet extends DataSet {
         $dataSet = $this->fetchQuery($sqlQuery);
         return $dataSet;
     }
+
+    public function insertTimesheet($timesheetID, $projectID, $userID, $clientID, $period, $approvedBy, $name, $comments, $fileLink){
+        $sqlQuery = "INSERT INTO hackcamp8.timesheet (timesheetID, projectID, UserID, ClientID, Period, ApprovedBy, Name, Comments, FileLink)
+        VALUES ($timesheetID, $projectID, $userID, $clientID, '$period', '$approvedBy', '$name', '$comments', '$fileLink')";
+    }
 }
 
 

@@ -36,10 +36,6 @@ class User {
         return $this->_firstName . ' ' . $this->_lastName;
     }
 
-    public function getPass() {
-       return $this->_password;
-    }
-
     public function getPassword() {
         return $this->_password;
     }

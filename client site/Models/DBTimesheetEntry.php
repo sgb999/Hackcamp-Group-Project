@@ -19,8 +19,8 @@ class DBTimesheetEntry
         $this->id = $dbRow['ID'];
         $this->timesheetID = $dbRow['TimesheetID'];
         $this->date = $dbRow['Date'];
-        $this->workingHours = $dbRow['Worked hours'];
-        $this->distance = $dbRow['Traveling distance in km'];
+        $this->workingHours = $dbRow['WorkedHours'];
+        $this->distance = $dbRow['TravelDistanceKM'];
         $this->other = $dbRow['Other'];
     }
 

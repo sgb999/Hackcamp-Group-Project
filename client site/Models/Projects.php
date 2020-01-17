@@ -3,7 +3,7 @@
 
 class Projects
 {
-    private $_id, $_Pname, $_Tnum, $_Cid, $_Cname, $_Pdate, $_Users;
+    private $_id, $_Pname, $_Tnum, $_Cid, $_Cname, $_Pdate, $_Users, $_UsersExist;
 
     public function __construct($dbRow)
     {
@@ -14,6 +14,7 @@ class Projects
         $this->_Cid = $dbRow['clientID'];
         $this->_Cname = $dbRow['clientName'];
         $this->_Users = Array();
+        $this->_UsersExist = false;
     }
 
     private function retrieveUsers($projectID)
@@ -50,8 +51,11 @@ class Projects
     }
 
     public function getUsers(){
-        // TODO: if statement to pull from users array if it is set
-        $this->retrieveUsers($this->_id);
-        return $this->retrieveUsers($this->_id);;
+        // get from users array if it is set
+        if ( $this->_UsersExist == false) {
+            $this->_Users = $this->retrieveUsers($this->_id);
+            $this->_UsersExist == true;
+        }
+        return $this->_Users;
     }
 }

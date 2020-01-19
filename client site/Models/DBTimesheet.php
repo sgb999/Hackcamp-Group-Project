@@ -13,7 +13,11 @@ class DBTimesheet {
     protected  $approvedBy;
     protected  $name;
     protected  $comments;
-    
+    protected  $fileLink;
+    protected  $uplodeDate;
+    protected  $entries = Array();
+    protected  $entriesExist = false;
+
     public function __construct($dbRow) {
         $this->id = $this->returnIfExists($dbRow, 'timesheetID');
         $this->projectID = $this->returnIfExists($dbRow, 'projectID');
@@ -25,14 +29,34 @@ class DBTimesheet {
         $this->approvedBy = $this->returnIfExists($dbRow, 'ApprovedBy');
         $this->name = $this->returnIfExists($dbRow, 'Name');
         $this->comments = $this->returnIfExists($dbRow, 'Comments');
+        $this->fileLink = $this->returnIfExists($dbRow, 'FileLink');
+        $this->uplodeDate = $this->returnIfExists($dbRow, 'uploadDate');
     }
 
-    private function returnIfExists(Array $array, string $index){
+    private function returnIfExists(Array $array, String $index){
         if ( array_key_exists($array, $index)){
             return $array[$index];
         } else {
             return null;
         }
+    }
+
+    public function getEntries(){
+        // get from entries array if it is set
+        if ( $this->entriesExist == false) {
+            $this->entries = $this->retrieveEntries($this->id);
+            $this->entriesExist = true;
+        }
+        return $this->entries;
+    }
+
+    private function retrieveEntries($timesheetID)
+    {
+        $timesheetsDataSet = new DBTimesheetEntryDataSet();
+        $entriesInTimesheet = $timesheetsDataSet->fetchDataByTimesheet($timesheetID);
+        $this->entries = $entriesInTimesheet;
+        $this->entriesExist = true;
+        return $entriesInTimesheet;
     }
 
     public function convertExcelTimesheet(ExcelTimesheet $ts, $projectID, $clientID, $userID){
@@ -47,21 +71,107 @@ class DBTimesheet {
         $this->name = $ts->getName();
         $this->comments = $ts->getComments();
     }
-
-    public function getForumID() {
-        return $this->_id;
-    }
    
     public function getName() {
-       return $this->_name;
+       return $this->name;
     }
-    
-    public function getShortDescription() {
-       return $this->_shortDescription; //remember to decrypt password
+
+
+
+    /**
+     * @return mixed|null
+     */
+    public function getClientID()
+    {
+        return $this->clientID;
     }
-    
-    public function getDescription() {
-       return $this->_description;
+
+    /**
+     * @return mixed|null
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getApprovedBy()
+    {
+        return $this->approvedBy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getTimesheetOf()
+    {
+        return $this->timesheetOf;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getClientName()
+    {
+        return $this->clientName;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getProjectID()
+    {
+        return $this->projectID;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getUserID()
+    {
+        return $this->userID;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getFileLink()
+    {
+        return $this->fileLink;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getUplodeDate()
+    {
+        return $this->uplodeDate;
     }
 }
 

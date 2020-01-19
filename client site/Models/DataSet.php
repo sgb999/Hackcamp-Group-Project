@@ -25,7 +25,7 @@ abstract class DataSet {
     protected function executeQuery($sqlQuery) {
 
         $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
-        $statement->execute(); // execute the PDO statement
+        return $statement->execute(); // execute the PDO statement
     }
 
     // converts the row to the corresponding data object

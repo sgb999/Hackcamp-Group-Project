@@ -49,9 +49,9 @@ class DBTimesheetEntry
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getWorkingHours(): string
+    public function getWorkingHours()
     {
         return $this->workingHours;
     }

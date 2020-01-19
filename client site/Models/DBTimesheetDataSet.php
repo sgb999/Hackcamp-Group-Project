@@ -1,7 +1,7 @@
 <?php
 
-require_once ('Model/DataSet.php');
-require_once ('Model/DBTimesheet.php');
+require_once ('Models/DataSet.php');
+require_once ('Models/DBTimesheet.php');
 
 class DBTimesheetDataSet extends DataSet {
 
@@ -59,9 +59,10 @@ class DBTimesheetDataSet extends DataSet {
         return $dataSet;
     }
 
-    public function insertTimesheet($timesheetID, $projectID, $userID, $clientID, $period, $approvedBy, $name, $comments, $fileLink){
-        $sqlQuery = "INSERT INTO hackcamp8.timesheet (timesheetID, projectID, UserID, ClientID, Period, ApprovedBy, Name, Comments, FileLink)
-        VALUES ($timesheetID, $projectID, $userID, $clientID, '$period', '$approvedBy', '$name', '$comments', '$fileLink')";
+    public function insertTimesheet($projectID, $userID, $clientID, $period, $name, $comments, $fileLink){
+        $sqlQuery = "INSERT INTO hackcamp8.timesheet (projectID, UserID, ClientID, Period, Name, Comments, FileLink)
+        VALUES ($projectID, $userID, $clientID, '$period', '$name', '$comments', '$fileLink')";
+        return $this->executeQuery($sqlQuery);
     }
 }
 

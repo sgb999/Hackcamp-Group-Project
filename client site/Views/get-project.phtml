@@ -10,7 +10,7 @@
             <div class="form-group">
                 <p></p>
                 <?php
-                $test = $view->users;
+                $test = $view->test;
                 foreach ($test as $user){?>
                     <tr><td><p><?php echo $user->getFirstName(); echo " "; echo $user->getLastName()?></p></td></tr>
                 <?php }?>
@@ -44,7 +44,11 @@
         <?php  ?>
         <div class="chart-container">
             <canvas id="chart_0"></canvas>
-        </div>
+        </div><?php
+        $view->graphUserArray = $graphUserArray;
+        foreach ($graphUserArray as $userGraph){?>
+        <tr><td><p><?php //echo $user->getFirstName(); echo " "; echo $user->getLastName()?></p></td></tr>
+
         <script src="/js/Chart.min.js"></script>
         <script>
             var data = {
@@ -56,7 +60,7 @@
                     borderWidth: 1,
                     hoverBackgroundColor: "rgba(245,130,12,0.4)",
                     hoverBorderColor: "rgba(245,130,12,1)",
-                    data: [	8, 7, 8, 5, 8, 0, 0, 7, 8, 7, 8, 8, 0, 0, 8, 8, 8, 8, 8, 0, 0, 8, 8, 8, 8, 7, 0, 0, 8, 8, 8], //get the values from the controller
+                    data: [<?php $userTimeArray;?>], //get the values from the controller
                 }]
             };
 
@@ -100,5 +104,6 @@
 
             };
         </script>
+        <?php }?>
         </tbody>
 <?php require('template/footer.phtml')?>

@@ -34,7 +34,7 @@ class DBTimesheet {
     }
 
     private function returnIfExists(Array $array, String $index){
-        if ( array_key_exists($array, $index)){
+        if ( array_key_exists($index, $array)){
             return $array[$index];
         } else {
             return null;

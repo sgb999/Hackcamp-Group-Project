@@ -1,52 +1,53 @@
 <?php require('template/header.phtml') ?>
     <h2><?php echo 'Hello '. $_SESSION['username'];?></h2>
     <thead>
-        <h3>My Projects</h3>
+    <h3>My Projects</h3>
     <p></p>
-        </thead>
-        <tbody>
-        <button type="button" class="collapsible">View user's in this project</button>
-        <div class="content">
-            <div class="form-group">
-                <p></p>
-                <?php
-                $test = $view->test;
-                foreach ($test as $user){?>
-                    <tr><td><p><?php echo $user->getFirstName(); echo " "; echo $user->getLastName()?></p></td></tr>
-                <?php }?>
-            </div>
+    </thead>
+    <tbody>
+    <button type="button" class="collapsible">View user's in this project</button>
+    <div class="content">
+        <div class="form-group">
+            <p></p>
+            <?php
+            $test = $view->test;
+            foreach ($test as $user){?>
+                <tr><td><p><?php echo $user->getFirstName(); echo " "; echo $user->getLastName()?></p></td></tr>
+            <?php }?>
         </div>
-        <p></p>
-        <button type="button" class="collapsible">Upload Timesheet</button>
-        <div class="content">
-            <div class="form-group">
-        <div class="row d-flex justify-content-center mt-100">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>File Upload</h5>
-                    </div>
-                    <div class="card-block">
-                        <form action="/Controller/parse_excel_file_modified.php" method="POST" enctype="multipart/form-data">
-                            <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
-                            <br>
-                            <input type="file" name="excel_file" style="border: 2px dashed #023A78; height: 120px; padding: 1rem" accept=".xlsx" value="">
-                            <br>
-                            <p></p>
-                            <button class="btn1"><span class="glyphicon glyphicon-upload"></span> submit</button>
-                        </form>
+    </div>
+    <p></p>
+    <button type="button" class="collapsible">Upload Timesheet</button>
+    <div class="content">
+        <div class="form-group">
+            <div class="row d-flex justify-content-center mt-100">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>File Upload</h5>
+                        </div>
+                        <div class="card-block">
+                            <form action="/Controller/parse_excel_file_modified.php" method="POST" enctype="multipart/form-data">
+                                <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+                                <br>
+                                <input type="file" name="excel_file" style="border: 2px dashed #023A78; height: 120px; padding: 1rem" accept=".xlsx" value="">
+                                <br>
+                                <p></p>
+                                <button class="btn1"><span class="glyphicon glyphicon-upload"></span> submit</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-            </div>
-        </div>
-        <?php  ?>
-        <div class="chart-container">
-            <canvas id="chart_0"></canvas>
-        </div><?php
-        $view->graphUserArray = $graphUserArray;
-        foreach ($graphUserArray as $userGraph){?>
+    </div>
+    <?php  ?>
+    <div class="chart-container">
+        <canvas id="chart_0"></canvas>
+    </div><?php
+    //$view->graphUserArray = $graphUserArray;
+    $distArray = $view->userTimeArray;
+    foreach ($distArray as $userData){?>
         <tr><td><p><?php //echo $user->getFirstName(); echo " "; echo $user->getLastName()?></p></td></tr>
 
         <script src="/js/Chart.min.js"></script>
@@ -60,7 +61,7 @@
                     borderWidth: 1,
                     hoverBackgroundColor: "rgba(245,130,12,0.4)",
                     hoverBorderColor: "rgba(245,130,12,1)",
-                    data: [<?php $userTimeArray;?>], //get the values from the controller
+                    data: [<?php echo $userData;?>], //get the values from the controller
                 }]
             };
 
@@ -104,6 +105,6 @@
 
             };
         </script>
-        <?php }?>
-        </tbody>
+    <?php }?>
+    </tbody>
 <?php require('template/footer.phtml')?>

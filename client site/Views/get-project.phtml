@@ -1,85 +1,96 @@
 <?php require('template/header.phtml') ?>
+    <script src="/js/Chart.min.js"></script>
     <h2><?php echo 'Hello '. $_SESSION['username'];?></h2>
     <thead>
-    <h3>My Projects</h3>
+    <h3><?php ;?></h3>
     <p></p>
     </thead>
-    <tbody><?php
+    <tbody>
+    <input type="submit" class="btn btn-primary btn-block" value="submit" name="submit">
+    <?php
     $users = $view->users;
-    foreach ($users as $user){?>
-    <button type="button" class="collapsible"><?php echo $user->getFirstName(); echo " "; echo $user->getLastName()?></button>
-    <div class="content">
+
+    foreach ($users as $user){
+        $check = $users->getUserID();?>
+        <button type="button" class="collapsible"><?php echo $user->getFirstName(); echo " "; echo $user->getLastName()?> <!--<input type ="hidden" value="submit <?php //$user->getUserID();?>"></input>--></button>
+        <?php// if (isset($_POST['username'])) ?>
+        <div class="content">
         <div class="form-group">
             <p></p>
-            <?php  ?>
+            <?php $timeArray = $view->userTimeArray;;?>
             <div class="chart-container">
-                <canvas id="chart_0"></canvas>
-            </div><?php
-            //$view->graphUserArray = $graphUserArray;
-            $distArray = $view->userTimeArray;
-            foreach ($distArray as $userData){?>
-                <tr><td><p><?php //echo $user->getFirstName(); echo " "; echo $user->getLastName()?></p></td></tr>
+                <?php for ($i =0; $i<count($timeArray); $i++){;?>
+                <?php $loop = $user->getUserID() . 't' . $i;?>
+                <canvas id="chart_<?php echo $loop;?>"></canvas>
+            </div><?php if ($_SESSION['userID'] == $check || $_SESSION == 1){;
+            foreach ($timeArray as $userDataByTimesheet) {
+            foreach ($userDataByTimesheet as $userData) {
+            ?>
 
-                <script src="/js/Chart.min.js"></script>
-                <script>
-                    var data = {
-                        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
-                        datasets: [{
-                            label: "worked hours",
-                            backgroundColor: "rgba(2,58,120,0.2)",
-                            borderColor: "rgba(2,58,120,1)",
-                            borderWidth: 1,
-                            hoverBackgroundColor: "rgba(245,130,12,0.4)",
-                            hoverBorderColor: "rgba(245,130,12,1)",
-                            data: [<?php echo $userData;?>], //get the values from the controller
-                        }]
-                    };
+            <script>
+                var data = {
+                    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+                    datasets: [{
+                        label: "worked hours",
+                        backgroundColor: "rgba(2,58,120,0.2)",
+                        borderColor: "rgba(2,58,120,1)",
+                        borderWidth: 1,
+                        hoverBackgroundColor: "rgba(245,130,12,0.4)",
+                        hoverBorderColor: "rgba(245,130,12,1)",
+                        data: [<?php echo $userData;?>], //get the values from the controller
+                    }]
+                };
 
-                    var option = {
-                        scales: {
-                            yAxes: [{
-                                stacked: true,
-                                gridLines: {
-                                    display: true,
-                                    color: "rgba(102,102,102,0.2)"
-                                }
-                            }],
-                            xAxes: [{
-                                gridLines: {
-                                    display: false
-                                }
-                            }]
-                        }
-                    };
-
-                    Chart.Bar('chart_0', {
-                        options: option,
-                        data: data
-                    });
-                    window.onload = function() {
-                        var ctx = document.getElementById('chart_0').getContext('2d');
-                        window.myBar = new Chart(ctx, {
-                            type: 'bar',
-                            data: barChartData,
-                            options: {
-                                responsive: true,
-                                legend: {
-                                    position: 'top',
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Chart.js Bar Chart'
-                                }
+                var option = {
+                    scales: {
+                        yAxes: [{
+                            stacked: true,
+                            gridLines: {
+                                display: true,
+                                color: "rgba(102,102,102,0.2)"
                             }
-                        });
+                        }],
+                        xAxes: [{
+                            gridLines: {
+                                display: false
+                            }
+                        }]
+                    }
+                };
 
-                    };
-                </script>
-            <?php }?>
+                Chart.Bar('chart_<?php echo $loop;?>', {
+                    options: option,
+                    data: data
+                });
+                window.onload = function () {
+                    var ctx = document.getElementById('chart_<?php echo $loop;?>').getContext('2d');
+                    window.myBar = new Chart(ctx, {
+                        type: 'bar',
+                        data: barChartData,
+                        options: {
+                            responsive: true,
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Chart.js Bar Chart'
+                            }
+                        }
+                    });
+
+                };
+            </script>
+            <?php }
+         }
+            }?>
         </div>
     </div>
-    <?php }?>
-    <p></p>
+        <p></p>
+    <?php }
+    }?>
+
+
     <button type="button" class="collapsible">Upload Timesheet</button>
     <div class="content">
         <div class="form-group">
@@ -104,6 +115,7 @@
             </div>
         </div>
     </div>
+    <?php  ?>
 
     </tbody>
 <?php require('template/footer.phtml')?>

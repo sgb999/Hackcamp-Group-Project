@@ -4,7 +4,8 @@ require_once ('Models/User.php');
 require_once ('Models/DBTimesheetEntryDataSet.php');
 require_once ('Models/DBTimesheetEntry.php');
 $projectID=implode($_GET); //TODO: check if project ID is empty
-$ID = $_SESSION['UserID'];
+
+$ID = $_SESSION['userID'];
 $level = $_SESSION['userLevel'];
 // user data for who is in the project
 $usersDataSet = new UsersDataSet();
@@ -17,7 +18,7 @@ if ($level = 0){
 } else {
     $graphUserArray = $usersDataSet->fetchDataByProject($projectID);
 }
-$view->MySQL = $userArray;
+$view->users = $userArray;
 
 //store distance for user from timesheet entries
 $userDistanceArray = Array();

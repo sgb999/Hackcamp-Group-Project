@@ -6,24 +6,24 @@
     <p></p>
     </thead>
     <tbody>
-    <input type="submit" class="btn btn-primary btn-block" value="submit" name="submit">
+    <input type="submit" class="btn btn-primary btn-block" value="Download blank timesheet" name="submit">
     <?php
     $users = $view->users;
 
     foreach ($users as $user){
-        $check = $users->getUserID();?>
+       // $check = $users->getUserID();?>
         <button type="button" class="collapsible"><?php echo $user->getFirstName(); echo " "; echo $user->getLastName()?> <!--<input type ="hidden" value="submit <?php //$user->getUserID();?>"></input>--></button>
         <?php// if (isset($_POST['username'])) ?>
         <div class="content">
         <div class="form-group">
-            <p></p>
+            <p></p><?php //if ($_SESSION['userID'] == $check || $_SESSION == 1) {?>
             <?php $timeArray = $view->userTimeArray;;?>
             <div class="chart-container">
                 <?php for ($i =0; $i<count($timeArray); $i++){;?>
                 <?php $loop = $user->getUserID() . 't' . $i;?>
                 <canvas id="chart_<?php echo $loop;?>"></canvas>
-            </div><?php if ($_SESSION['userID'] == $check || $_SESSION == 1){;
-            foreach ($timeArray as $userDataByTimesheet) {
+            </div>
+            <?php foreach ($timeArray as $userDataByTimesheet) {
             foreach ($userDataByTimesheet as $userData) {
             ?>
 
@@ -82,13 +82,13 @@
                 };
             </script>
             <?php }
-         }
-            }?>
+         }?>
+            <input type="submit" class="btn btn-primary btn-block" value="Download user's timesheet" name="download">
+            <?php }?>
         </div>
     </div>
         <p></p>
-    <?php }
-    }?>
+    <?php }?>
 
 
     <button type="button" class="collapsible">Upload Timesheet</button>

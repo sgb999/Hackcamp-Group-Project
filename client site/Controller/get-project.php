@@ -4,21 +4,20 @@ require_once ('Models/User.php');
 require_once ('Models/DBTimesheetEntryDataSet.php');
 require_once ('Models/DBTimesheetEntry.php');
 $projectID=implode($_GET); //TODO: check if project ID is empty
-
 $ID = $_SESSION['userID'];
 $level = $_SESSION['userLevel'];
 // user data for who is in the project
 $usersDataSet = new UsersDataSet();
 $userArray = $usersDataSet->fetchDataByProject($projectID);
+$view->users = $userArray;
 
 //get the user's graphs the user can display
 $graphUserArray = Array();
-if ($level = 0){
+if ($level = 0){ // if normal user
     $graphUserArray = $ID;
-} else {
-    $graphUserArray = $usersDataSet->fetchDataByProject($projectID);
+} else { //if admin
+    $graphUserArray = $userArray;
 }
-$view->users = $userArray;
 
 //store distance for user from timesheet entries
 $userDistanceArray = Array();
@@ -53,6 +52,8 @@ foreach($graphUserArray as $user){
     $userDistanceArray[$user->getUserID()] = implode(', ', $distanceArray);
     $userTimeArray[$user->getUserID()] = implode(', ', $timeWorkedArray);
 }
+$view->userDistanceArray = $userDistanceArray;
+$view->userTimeArray = $userTimeArray;
 
 // TODO: send $userDistanceArray and $userTimeArray to the view
 

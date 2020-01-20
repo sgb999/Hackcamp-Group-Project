@@ -33,6 +33,16 @@ class UsersDataSet extends DataSet {
         return $dataSet;
     }
 
+    public function fetchDataByUserID($userID) {
+
+        $sqlQuery = 'SELECT users.* ' .
+            'FROM hackcamp8.users ' .
+            'WHERE users.userID = ' . $userID;
+
+        $dataSet = $this->fetchQuery($sqlQuery);
+        return $dataSet;
+    }
+
     public function fetchDataByUserNameAndPass($userName, $password) {
 
         $sqlQuery = 'SELECT users.* ' .

@@ -6,12 +6,16 @@ require_once ('Models/DBTimesheetEntry.php');
 $projectID=implode($_GET); //TODO: check if project ID is empty
 $ID = $_SESSION['UserID'];
 $level = $_SESSION['userLevel'];
-
+// user data for who is in the project
 $usersDataSet = new UsersDataSet();
+$userArray = $usersDataSet->fetchDataByProject($projectID);
+
+//get the user's graphs the user can display
+$graphUserArray = Array();
 if ($level = 0){
-    $userArray = $ID;
+    $graphUserArray = $ID;
 } else {
-    $userArray = $usersDataSet->fetchDataByProject($projectID);
+    $graphUserArray = $usersDataSet->fetchDataByProject($projectID);
 }
 $view->MySQL = $userArray;
 
@@ -23,7 +27,7 @@ $userTimeArray = Array();
 $entryDataSet = new DBTimesheetEntryDataSet();
 
 // for each user associated with this project
-foreach($userArray as $user){
+foreach($graphUserArray as $user){
     // create arrays for the distance and time
     $distanceArray = Array();
     $timeWorkedArray = Array();

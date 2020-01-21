@@ -1,7 +1,7 @@
 <?
 //require_once 'lib/SimpleXLSX.php';
-require_once 'Model/ExcelTimesheet.php';
-require_once 'Model/ExcelTimesheetEntry.php';
+require_once '../Models/ExcelTimesheet.php';
+require_once '../Models/ExcelTimesheetEntry.php';
 
 if (isset($_POST['submit'])) {
 
@@ -9,16 +9,22 @@ if (isset($_POST['submit'])) {
 
   if ($has_file) {
 
-    $destination = $_SERVER['DOCUMENT_ROOT'] . '/tmp';
-    $source = $_FILES['excel_file']['tmp_name'];
-    $target = "$destination/$source.xlsx"; // changed from xls
+	$destination = $_SERVER['DOCUMENT_ROOT'] . '/tmp';
+	$source = $_FILES['excel_file']['tmp_name'];
+	$basename = basename($source);
+	$target = $destination . "/$basename.xlsx"; // changed from xls
     
     move_uploaded_file($source, $target);
 
-    require $_SERVER['DOCUMENT_ROOT'] . '/lib/SimpleXLSX.php';
+	require $_SERVER['DOCUMENT_ROOT'] . '/lib/SimpleXLSX.php';
 
     //test to parse the excel file
 	$fileLink = 'tmp/timesheetLiam.xlsx'; //the excel file Kim gave us is an 'xls' not an 'xlsx', so I converted it in excel
+
+	// once excel parsing works fine with timesheetLiam.xlsx, change
+	// the above $fileLink variable to $target instead of 'tmp/timesheetLiam.xlsx'
+	// like this: $fileLink = $target;
+
 	// if ( $xlsx = SimpleXLSX::parse($fileLink) )
 	if ( $timesheet = new ExcelTimesheet($fileLink) ) {
 	  echo $timesheet->getTimesheetOf() ."\n";
@@ -39,8 +45,9 @@ if (isset($_POST['submit'])) {
 	  echo SimpleXLSX::parseError();
 	}
 
+	die("1111111111");
     header('Location: /');
   }
 } else {
-  header('Location: /');
+	header('Location: /');
 }

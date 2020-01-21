@@ -2,18 +2,21 @@
     <script src="/js/Chart.min.js"></script>
     <h2><?php echo 'Hello '. $_SESSION['username'];?></h2>
     <thead>
-    <h3><?php ;?></h3>
+
+    <h3><?php echo $view->projectName;?></h3>
+    <h4 style="color:#D3D3D3;"><?php echo $view->clientName;?></h4>
     <p></p>
     </thead>
     <tbody>
-    <input type="submit" class="btn btn-primary btn-block" value="Download blank timesheet" name="submit">
+    <a class="btn btn-primary btn-block" href="/Blank%20Excel/blank%20timesheet.xlsx" role="button">Download blank timesheet</a>
+
+        <p></p>
     <?php
     $users = $view->users;
 
     foreach ($users as $user){
         // $check = $users->getUserID();?>
         <button type="button" class="collapsible"><?php echo $user->getFirstName(); echo " "; echo $user->getLastName()?> <!--<input type ="hidden" value="submit <?php //$user->getUserID();?>"></input>--></button>
-        <?php// if (isset($_POST['username'])) ?>
         <div class="content">
             <div class="form-group">
                 <?php $timeArray = $view->userTimeArray;?>
@@ -84,8 +87,11 @@
 
                             };
                         </script>
-
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <input type="submit" class="btn btn-primary btn-block" value="Download user's timesheet" name="download">
+                    <?php if (isset($_POST['download']))
+                    ?>
+                </form>
                     <?php }
                 }?>
             </div>

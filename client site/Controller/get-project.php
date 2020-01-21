@@ -3,7 +3,17 @@ require_once ('Models/UsersDataSet.php');
 require_once ('Models/User.php');
 require_once ('Models/DBTimesheetEntryDataSet.php');
 require_once ('Models/DBTimesheetEntry.php');
+require_once ('Models/DBTimesheetDataSet.php');
+require_once ('Models/DBTimesheet.php');
+require_once ('Models/ProjectsDataSet.php');
+require_once ('Models/Projects.php');
 $projectID=implode($_GET); //TODO: check if project ID is empty
+//get project information
+$projectsDataSet = new ProjectsDataSet();
+$project = $projectsDataSet->fetchDataByProject($projectID); //TODO: check if project exists
+$view->projectName = $project->getPname();
+$view->clientName = $project->getCname();
+
 $ID = $_SESSION['userID'];
 $level = $_SESSION['userLevel'];
 // user data for who is in the project
@@ -13,10 +23,10 @@ $view->users = $userArray;
 
 //get the user's graphs the user can display
 $graphUserArray = Array();
-if ($level = 0){ // if normal user
-    $graphUserArray = $ID;
+if ($level == 0){ //if user
+    $graphUserArray = $usersDataSet->fetchDataByUserID($ID) ;
 } else { //if admin
-    $graphUserArray = $userArray;
+    $graphUserArray = $usersDataSet->fetchDataByProject($projectID);
 }
 
 //store distance for user from timesheet entries
@@ -24,34 +34,44 @@ $userDistanceArray = Array();
 //store worked hours for user from timesheet entries
 $userTimeArray = Array();
 //Class to return queries by timesheet entries
-$entryDataSet = new DBTimesheetEntryDataSet();
+$timesheetDataSet = new DBTimesheetDataSet();
 
 // for each user associated with this project
 foreach($graphUserArray as $user){
-    // create arrays for the distance and time
-    $distanceArray = Array();
-    $timeWorkedArray = Array();
+    $timesheetDistanceArray = Array();
+    $timesheetTimeArray = Array();
+
     // get user ID
     $userID = $user->getUserID();
-    // get entries
-    // TODO: check if the timesheet exists
-    $timesheetEntries = $entryDataSet->fetchDataByProjectAndUser($projectID,$userID);
+    // get timesheets
+    $timesheets = $timesheetDataSet->fetchDataByUserAndProject($userID, $projectID);
 
-    //seed arrays with null values
-    for ($i = 1; $i <= 31; $i++){
-        $distanceArray[$i] = 0;
-        $timeWorkedArray[$i] = 0;
-    }
+    foreach ($timesheets as $timesheet){
+        // create arrays for the distance and time
+        $distanceArray = array_fill(1, 31, 0);
+        $timeWorkedArray = array_fill(1, 31, 0);
 
-    // for each entry associated with this user, store content in an array by date
-    foreach ($timesheetEntries as $entry){
-        $distanceArray[$entry->getDate()] = $entry->getDistance();
-        $timeWorkedArray[$entry->getDate()] = $entry->getWorkingHours();
+        $timesheet->getEntries();
+
+        // get entries
+        //$timesheetEntries = $entryDataSet->fetchDataByProjectAndUser($projectID,$userID);
+        $timesheetEntries = $timesheet->getEntries();
+
+        // for each entry associated with this user, store content in an array by date
+        foreach ($timesheetEntries as $entry){
+            $distanceArray[$entry->getDate()] = $entry->getDistance();
+            $timeWorkedArray[$entry->getDate()] = $entry->getWorkingHours();
+        }
+        /* store the arrays as a string in an array sorted by user
+        $userDistanceArray[$user->getUserID()] = implode(', ', $distanceArray);
+        $userTimeArray[$user->getUserID()] = implode(', ', $timeWorkedArray);*/
+        $timesheetDistanceArray[$timesheet->getId()] = implode(', ', $distanceArray);
+        $timesheetTimeArray[$timesheet->getId()] = implode(', ', $timeWorkedArray);
     }
-    // store the arrays as a string in an array sorted by user
-    $userDistanceArray[$user->getUserID()] = implode(', ', $distanceArray);
-    $userTimeArray[$user->getUserID()] = implode(', ', $timeWorkedArray);
+    $userDistanceArray[$user->getUserID()] = $timesheetDistanceArray;
+    $userTimeArray[$user->getUserID()] = $timesheetTimeArray;
 }
+
 $view->userDistanceArray = $userDistanceArray;
 $view->userTimeArray = $userTimeArray;
 

@@ -2,21 +2,21 @@
     <script src="/js/Chart.min.js"></script>
     <h2><?php echo 'Hello '. $_SESSION['username'];?></h2>
     <thead>
-    <h3><?php ;?></h3>
+
+    <h3><?php echo $view->projectName;?></h3>
+    <h4 style="color:#D3D3D3;"><?php echo $view->clientName;?></h4>
     <p></p>
     </thead>
     <tbody>
-    <!-- download link -->
-    <a href="../Blank%20Excel/Blank-Timesheet.xlsx">Download blank timesheet</a>
-    <!-- now find a way to attach this to the button -->
-    <input type="submit" class="btn btn-primary btn-block" value="Download blank timesheet" name="submit">
+    <a class="btn btn-primary btn-block" href="/Blank%20Excel/Blank-Timesheet.xlsx" role="button">Download blank timesheet</a>
+
+        <p></p>
     <?php
     $users = $view->users;
 
     foreach ($users as $user){
         // $check = $users->getUserID();?>
         <button type="button" class="collapsible"><?php echo $user->getFirstName(); echo " "; echo $user->getLastName()?> <!--<input type ="hidden" value="submit <?php //$user->getUserID();?>"></input>--></button>
-        <?php// if (isset($_POST['username'])) ?>
         <div class="content">
             <div class="form-group">
                 <?php $timeArray = $view->userTimeArray;?>
@@ -87,18 +87,17 @@
 
                             };
                         </script>
-
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <input type="submit" class="btn btn-primary btn-block" value="Download user's timesheet" name="download">
+                    <?php if (isset($_POST['download']))
+                    ?>
+                </form>
                     <?php }
                 }?>
             </div>
         </div>
         <p></p>
     <?php }?>
-
-
-
-
     <button type="button" class="collapsible">Upload Timesheet</button>
     <div class="content">
         <div class="form-group">
@@ -110,6 +109,9 @@
                         </div>
                         <div class="card-block">
                             <form action="/Controller/parse_excel_file_modified.php" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['userID'];?>">
+                                <input type="hidden" name="project_id" value="<?php echo $view->projectID;?>">
+                                <input type="hidden" name="client_id" value="<?php echo $view->clientID;?>">
                                 <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
                                 <br>
                                 <input type="file" name="excel_file" style="border: 2px dashed #023A78; height: 120px; padding: 1rem" accept=".xlsx" value="">

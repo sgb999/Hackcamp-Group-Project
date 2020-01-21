@@ -10,7 +10,7 @@ require_once ('Models/Projects.php');
 $projectID=implode($_GET); //TODO: check if project ID is empty
 //get project information
 $projectsDataSet = new ProjectsDataSet();
-$project = $projectsDataSet->fetchDataByProject($projectID); //TODO: check if project exists
+$project = $projectsDataSet->fetchDataByProject($projectID)[0]; //TODO: check if project exists
 $view->projectName = $project->getPname();
 $view->clientName = $project->getCname();
 

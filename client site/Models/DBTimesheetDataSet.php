@@ -1,9 +1,10 @@
 <?php
 
-require_once ('Models/DataSet.php');
-require_once ('Models/DBTimesheet.php');
+require_once ('DataSet.php');
+require_once ('DBTimesheet.php');
 
 class DBTimesheetDataSet extends DataSet {
+    private $idOfLastInsert = null;
 
     public function __construct() {
         parent::__construct();
@@ -62,7 +63,15 @@ class DBTimesheetDataSet extends DataSet {
     public function insertTimesheet($projectID, $userID, $clientID, $period, $name, $comments, $fileLink){
         $sqlQuery = "INSERT INTO hackcamp8.timesheet (projectID, UserID, ClientID, Period, Name, Comments, FileLink)
         VALUES ($projectID, $userID, $clientID, '$period', '$name', '$comments', '$fileLink')";
-        return $this->executeQuery($sqlQuery);
+        $success = $this->executeQuery($sqlQuery);
+        if ($success != false){
+            $this->idOfLastInsert = $this->getLastID();
+        }
+        return $success;
+    }
+
+    public function getIdOfLastInsert(){
+        return $this->idOfLastInsert;
     }
 }
 

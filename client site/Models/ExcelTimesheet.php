@@ -1,4 +1,7 @@
 <?php
+require_once ('DBTimesheetDataSet.php');
+require_once ('ExcelTimesheetEntry.php');
+require_once ('DataSet.php');
 /*TODO: some errors need fixing:
     'approvedBy' might need modifying
   NOTE: this version of the class only works with Liam's version of the company excel timesheet
@@ -233,6 +236,16 @@ class ExcelTimesheet
     public function getHTML()
     {
         $this->xlsx->toHTML();
+    }
+
+    public function insertInDatabase($projectID, $userID, $clientID, $fileLink){
+        // TODO: add data validation, make transaction
+        $timesheetDataSet = new DBTimesheetDataSet();
+        $timesheetDataSet->insertTimesheet($projectID, $userID, $clientID, $this->period, $this->name, $this->comments, $fileLink);
+        $timesheetID = $timesheetDataSet->getIdOfLastInsert();
+        foreach ($this->timesheetEntries as $entry){
+            $entry->insertInDatabase($timesheetID);
+        }
     }
 
 }

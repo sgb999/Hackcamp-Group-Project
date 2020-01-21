@@ -1,5 +1,5 @@
 <?php
-
+require_once ('DBTimesheetEntryDataSet.php');
 
 class ExcelTimesheetEntry
 {
@@ -50,4 +50,11 @@ class ExcelTimesheetEntry
     {
         return $this->other;
     }
+
+    public function insertInDatabase($timesheetID){
+        $entriesDataSet = new DBTimesheetEntryDataSet();
+        // TODO: add validation
+        $entriesDataSet->insertTimesheet($timesheetID, $this->date, $this->workingHours, $this->distance, $this->other);
+    }
+
 }

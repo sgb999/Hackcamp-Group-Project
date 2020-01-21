@@ -1,7 +1,7 @@
 <?php
 
-require_once ('Models/DataSet.php');
-require_once ('Models/DBTimesheetEntry.php');
+require_once ('DataSet.php');
+require_once ('DBTimesheetEntry.php');
 
 class DBTimesheetEntryDataSet extends DataSet {
 

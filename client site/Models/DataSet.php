@@ -28,6 +28,16 @@ abstract class DataSet {
         return $statement->execute(); // execute the PDO statement
     }
 
+    protected function getLastID() {
+
+        return $id = $this->_dbHandle->lastInsertId();
+    }
+
+    protected function getLastIDWithName($name) {
+
+        return $id = $this->_dbHandle->lastInsertId($name);
+    }
+
     // converts the row to the corresponding data object
     abstract protected function convertToData($row);
 }

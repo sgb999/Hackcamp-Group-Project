@@ -3,7 +3,7 @@
 require_once ('Models/DataSet.php');
 require_once ('Models/Projects.php');
 
-class projectsDataSet extends DataSet {
+class ProjectsDataSet extends DataSet {
 
     public function __construct() {
         parent::__construct();

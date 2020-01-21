@@ -8,14 +8,20 @@ require_once ('Models/DBTimesheet.php');
 require_once ('Models/ProjectsDataSet.php');
 require_once ('Models/Projects.php');
 $projectID=implode($_GET); //TODO: check if project ID is empty
+// get session information
+$ID = $_SESSION['userID'];
+$level = $_SESSION['userLevel'];
+
 //get project information
 $projectsDataSet = new ProjectsDataSet();
 $project = $projectsDataSet->fetchDataByProject($projectID)[0]; //TODO: check if project exists
 $view->projectName = $project->getPname();
 $view->clientName = $project->getCname();
+//information needed for uploading timesheets
+$view->projectID = $project->getId();
+$view->clientID = $project->getCid();
+$view->userID = $ID;
 
-$ID = $_SESSION['userID'];
-$level = $_SESSION['userLevel'];
 // user data for who is in the project
 $usersDataSet = new UsersDataSet();
 $userArray = $usersDataSet->fetchDataByProject($projectID);
@@ -65,8 +71,9 @@ foreach($graphUserArray as $user){
         /* store the arrays as a string in an array sorted by user
         $userDistanceArray[$user->getUserID()] = implode(', ', $distanceArray);
         $userTimeArray[$user->getUserID()] = implode(', ', $timeWorkedArray);*/
-        $timesheetDistanceArray[$timesheet->getId()] = implode(', ', $distanceArray);
-        $timesheetTimeArray[$timesheet->getId()] = implode(', ', $timeWorkedArray);
+        $timesheetID = $timesheet->getId();
+        $timesheetDistanceArray[$timesheetID] = implode(', ', $distanceArray);
+        $timesheetTimeArray[$timesheetID] = implode(', ', $timeWorkedArray);
     }
     $userDistanceArray[$user->getUserID()] = $timesheetDistanceArray;
     $userTimeArray[$user->getUserID()] = $timesheetTimeArray;

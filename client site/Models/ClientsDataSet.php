@@ -46,6 +46,12 @@ class ClientsDataSet extends DataSet {
         $dataSet = $this->fetchQuery($sqlQuery);
         return $dataSet;
     }
+
+    public function insertClient($name){
+        $sqlQuery = "INSERT INTO hackcamp8.client (clientName)
+        VALUES ('$name')";
+        return $this->executeQuery($sqlQuery);
+    }
 }
 
 

@@ -40,7 +40,7 @@ class projectsDataSet extends DataSet {
         $sqlQuery = 'SELECT project.*, client.clientName ' .
             'FROM hackcamp8.project ' .
             'INNER JOIN hackcamp8.client ON hackcamp8.project.clientID = hackcamp8.client.clientID ' .
-            'WHERE hackcamp8.timesheet.projectID = ' . $projectID. ' ' .
+            'WHERE hackcamp8.project.projectID = ' . $projectID. ' ' .
             'ORDER BY project.projectDate desc';
 
         $dataSet = $this->fetchQuery($sqlQuery);
@@ -85,17 +85,11 @@ class projectsDataSet extends DataSet {
         return $dataSet;
     }
 
-    public function insertTeamNumberAndUserID($teamNumber, $userID) {
+    public function insertProject($name, $clientID, $teamNumber)
+    {
 
-        $sqlQuery = 'INSERT INTO project() ' .
-            'FROM hackcamp8.project ' .
-            'INNER JOIN hackcamp8.client ON hackcamp8.project.clientID = hackcamp8.client.clientID ' .
-            'INNER JOIN hackcamp8.teams ON hackcamp8.project.teamNumber = hackcamp8.teams.teamNumber ' .
-            'WHERE hackcamp8.timesheet.teamNumber = ' . $teamNumber. ' AND teams.userID = ' . $userID . ' ' .
-            'ORDER BY project.projectDate desc';
-
-        $dataSet = $this->fetchQuery($sqlQuery);
-        return $dataSet;
+        $sqlQuery = "INSERT INTO hackcamp8.project(projectName, clientID, teamNumber, projectDate) 
+                    VALUES('$name', '$clientID', '$teamNumber', NOW())";
     }
 }
 

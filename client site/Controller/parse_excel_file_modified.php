@@ -1,11 +1,11 @@
-<?
+<?php
 //require_once 'lib/SimpleXLSX.php';
 require_once '../Models/ExcelTimesheet.php';
 require_once '../Models/ExcelTimesheetEntry.php';
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit'])) { //not returning true
 
-  $has_file = $_FILES['excel_file']['name'] != '' ? 1 : 0;
+  $has_file = 1; //for testing set this once done //$_FILES['excel_file']['name'] != '' ? 1 : 0;
 
   if ($has_file) {
 
@@ -26,20 +26,13 @@ if (isset($_POST['submit'])) {
 	// like this: $fileLink = $target;
 
 	// if ( $xlsx = SimpleXLSX::parse($fileLink) )
-	if ( $timesheet = new ExcelTimesheet($fileLink) ) {
-	  echo $timesheet->getTimesheetOf() ."\n";
-	  echo $timesheet->getPeriod() ."\n";
-	  echo $timesheet->getClient() ."\n";
-	  echo $timesheet->getTotal() ."\n";
-	  foreach ( $timesheet->getTimesheetEntries() as $entry){
-		  echo $entry->getDate() ."\n";
-		  echo $entry->getWorkingHours() ."\n";
-		  echo $entry->getDistance() ."\n";
-		  echo $entry->getOther() ."\n" ."\n";
-	  }
-		echo $timesheet->getTotal() ."\n";
-		echo $timesheet->getApprovedBy() ."\n";
-		echo $timesheet->getComments() ."\n";
+	if ( $timesheet = new ExcelTimesheet('../' . $fileLink) ) {
+	    $projectID = 3; //get from view/controller
+	    $userID = 879; //get from view/controller
+	    $clientID = 1; //get from view/controller
+
+	    // insert timesheet data into the database
+	    $timesheet->insertInDatabase($projectID, $userID, $clientID, $fileLink);
 
 	} else {
 	  echo SimpleXLSX::parseError();

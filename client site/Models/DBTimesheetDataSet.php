@@ -61,8 +61,8 @@ class DBTimesheetDataSet extends DataSet {
     }
 
     public function insertTimesheet($projectID, $userID, $clientID, $period, $name, $comments, $fileLink){
-        $sqlQuery = "INSERT INTO hackcamp8.timesheet (projectID, UserID, ClientID, Period, Name, Comments, FileLink)
-        VALUES ($projectID, $userID, $clientID, '$period', '$name', '$comments', '$fileLink')";
+        $sqlQuery = "INSERT INTO hackcamp8.timesheet (projectID, UserID, ClientID, Period, Name, Comments, FileLink, uploadDate)
+        VALUES ($projectID, $userID, $clientID, '$period', '$name', '$comments', '$fileLink', NOW())";
         $success = $this->executeQuery($sqlQuery);
         if ($success != false){
             $this->idOfLastInsert = $this->getLastID();

@@ -37,11 +37,14 @@ a {
     color: #FFFFFF;
     cursor: pointer;
     padding: 18px;
-    width: 100%;
+    width: 33%;
     border: none;
     text-align: left;
     outline: none;
     font-size: 15px;
+}
+.upload{
+width: 100%;
 }
 .active, .collapsible:hover {
     background-color: #555;

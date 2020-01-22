@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) { //not returning true
 	    $projectID = $_POST['project_id']; //get from view/controller
 	    $userID = $_POST['user_id']; //get from view/controller
 	    $clientID = $_POST['client_id']; //get from view/controller
-        if ($_POST['all'] !== null){
+        if (array_key_exists('all', $_POST)){
             $all = $_POST['all'];
             //do this method
             $userQuery = new UsersDataSet();

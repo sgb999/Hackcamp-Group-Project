@@ -27,6 +27,15 @@ $usersDataSet = new UsersDataSet();
 $userArray = $usersDataSet->fetchDataByProject($projectID);
 $view->users = $userArray;
 
+//check if current user is in project
+$userInProject = false;
+foreach ($userArray as $user){
+    if ($user->getUserID ==  $ID){
+        $userInProject = true;
+    }
+}
+$view->userInProject = $userInProject;
+
 //get the user's graphs the user can display
 $graphUserArray = Array();
 if ($level == 0){ //if user

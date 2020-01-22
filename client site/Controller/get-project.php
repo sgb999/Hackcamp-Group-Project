@@ -35,10 +35,13 @@ if ($level == 0){ //if user
     $graphUserArray = $usersDataSet->fetchDataByProject($projectID);
 }
 
+
 //store distance for user from timesheet entries
 $userDistanceArray = Array();
 //store worked hours for user from timesheet entries
 $userTimeArray = Array();
+//store worked hours for user from timesheet entries
+$timesheetFileLinkArray = Array();
 //Class to return queries by timesheet entries
 $timesheetDataSet = new DBTimesheetDataSet();
 
@@ -52,7 +55,10 @@ foreach($graphUserArray as $user){
     // get timesheets
     $timesheets = $timesheetDataSet->fetchDataByUserAndProject($userID, $projectID);
 
-    foreach ($timesheets as $timesheet){
+    foreach ($timesheets as $tkey => $timesheet){
+        //retrive file link
+        $timesheetFileLinkArray[$tkey] = $timesheet->getFileLink();
+
         // create arrays for the distance and time
         $distanceArray = array_fill(1, 31, 0);
         $timeWorkedArray = array_fill(1, 31, 0);
@@ -82,7 +88,7 @@ foreach($graphUserArray as $user){
 $view->userDistanceArray = $userDistanceArray;
 $view->userTimeArray = $userTimeArray;
 
-// TODO: send $userDistanceArray and $userTimeArray to the view
+$view->timesheetFileLinkArray = $timesheetFileLinkArray;
 
 //$allMySQL = $MySQL->getTimesheetsgraphs($projectID);
 //$view->MySQL = $allMySQL;

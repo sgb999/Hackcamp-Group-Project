@@ -87,7 +87,7 @@
 
                             };
                         </script>
-                        <a class="btn btn-primary btn-block" href="/tmp/<?php echo $view->timesheetFileLinkArray[$tkey];?>" role="button">Download Timesheet</a>
+                        <a class="btn btn-primary btn-block" href="/tmp/<?php echo $view->timesheetArray[$tkey]->getFileLink();?>" role="button">Download Timesheet</a>
                     <?php }
                 }?>
             </div>

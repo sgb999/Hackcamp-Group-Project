@@ -2,6 +2,8 @@
 //require_once 'lib/SimpleXLSX.php';
 require_once '../Models/ExcelTimesheet.php';
 require_once '../Models/ExcelTimesheetEntry.php';
+require_once '../Models/UsersDataSet.php';
+require_once '../Models/User.php';
 
 if (isset($_POST['submit'])) { //not returning true
 
@@ -37,6 +39,13 @@ if (isset($_POST['submit'])) { //not returning true
         if ($_POST['all'] !== null){
             $all = $_POST['all'];
             //do this method
+            $userQuery = new UsersDataSet();
+            $dataSet = $userQuery->fetchDataByProject($projectID);
+            Foreach ($dataSet as $user){
+                $currentUserID = $user->getUserID();
+                // insert timesheet data into the database
+                $timesheet->insertInDatabase($projectID, $currentUserID, $clientID, $fileLink);
+            }
         }
         else {
             // insert timesheet data into the database

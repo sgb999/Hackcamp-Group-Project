@@ -1,0 +1,18 @@
+<?php require('template/header.phtml') ?>
+    <h1><?php echo 'Hello '. $_SESSION['username'];?></h1>
+    <thead>
+    <tr><th><h2>All Projects</h2></th></tr>
+    </thead>
+    <div class="column_list">
+        <?php
+        $projectsDataSet = $view->projectsDataSet;
+        foreach ($projectsDataSet as $project){?>
+            <div class="column_list_item">
+                <tr><td><h3><a class="projectName" href="/get-project.php?projectID=<?php echo $project->getid()?>"><?php echo $project->getPname();?></h3></td></tr></a>
+                <p></p>
+                <tr><td><?php echo $project->getCname();?></td></tr>
+                <p></p>
+            </div>
+        <?php }?>
+    </div>
+<?php require('template/footer.phtml')?>

@@ -1,0 +1,55 @@
+<?php require('template/header.phtml')?>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <div class="form-group">
+            <label>Username:</label>
+            <input required="required" class="form-control" type="text" name="username" placeholder="username" value="">
+            <?php if (isset($_POST['user_name']))
+            {echo $_POST['username'];}
+            ?>
+        </div>
+        <div class="form-group">
+            <label>First Name:</label>
+            <input required="required" class="form-control" type="text" name="firstName" placeholder="example: John" value="">
+            <?php if (isset($_POST['firstName']))
+            ?>
+        </div>
+        <div class="form-group">
+            <label>Last Name:</label>
+            <input required="required" class="form-control" type="text" name="lastName" placeholder="example: Smith" value="">
+            <?php if (isset($_POST['lastName']))
+            ?>
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <input required="required" class="form-control" type="password" name="pass" placeholder="password must be 8 characters long" value="">
+            <?php if (isset($_POST['pass']))
+            ?>
+        </div>
+        <div class="form-group">
+            <label>Password again:</label>
+            <input required="required" class="form-control" type="password" name="user_pass_check" placeholder="Must match password" value="">
+            <?php if (isset($_POST['pass_check']))
+            ?>
+        </div>
+        <div class="form-group">
+            <label>E-mail:</label>
+            <input required="required" class="form-control" type="email" name="email" placeholder="example: E-Maill@address.com" value="">
+            <?php if (isset($_POST['email']))
+            ?>
+        </div>
+        <div class="form-check-inline">
+            <label class="form-check-label" for="radio">
+                <input type="radio" class="form-check-input" id="user" name="optradio" value="0"checked>User
+            </label>
+        </div>
+        <div class="form-check-inline">
+            <label class="form-check-label" for="admin">
+                <input type="radio" class="form-check-input" id="admin" name="optradio" value="1">Admin
+            </label>
+        </div>
+        <div>
+            <p></p>
+            <input type="submit" class="btn btn-primary btn-block" value="submit" name="submit">
+        </div>
+    </form>
+<?php require('template/footer.phtml') ?>

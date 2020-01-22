@@ -1,0 +1,26 @@
+
+<?php require('template/header.phtml') ?>
+
+<h3><?php echo 'Hello '. $_SESSION['username'];?></h3>
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <thead>
+    <tr><th><h1>My Projects</h1></th></tr>
+    </thead>
+    <tbody>
+
+    <div class="column_list">
+    <?php
+    $MySQL = $view->MySQL;
+    foreach ($MySQL as $projects){?>
+        <div class="column_list_item">
+        <tr><td><h3><a href="/get-project.php?projectID=<?php echo $projects->getid()?>"><?php echo $projects->getPname();?></h3></td></tr></a>
+        <p></p>
+        <tr><td><?php echo $projects->getCname();?></td></tr>
+        <p></p>
+        <tr><td><?php echo $projects->getPdate();?></td></tr>
+        </div>
+    <?php }?>
+    </div>
+    </tbody>
+</form>
+<?php require('template/footer.phtml')?>

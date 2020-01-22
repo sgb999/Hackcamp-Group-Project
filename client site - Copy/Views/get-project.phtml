@@ -1,0 +1,134 @@
+<?php require('template/header.phtml') ?>
+    <script src="/js/Chart.min.js"></script>
+    <h2><?php echo 'Hello '. $_SESSION['username'];?></h2>
+    <thead>
+
+    <h3><?php echo $view->projectName;?></h3>
+    <h4 style="color:#D3D3D3;"><?php echo $view->clientName;?></h4>
+    <p></p>
+    </thead>
+    <tbody>
+    <a class="btn btn-primary btn-block" href="/Blank%20Excel/Blank-Timesheet.xlsx" role="button">Download blank timesheet</a>
+
+    <p></p>
+    <?php
+    $users = $view->users;
+
+    foreach ($users as $user){
+        // $check = $users->getUserID();?>
+        <button type="button" class="collapsible"><?php echo $user->getFirstName(); echo " "; echo $user->getLastName()?> <!--<input type ="hidden" value="submit <?php //$user->getUserID();?>"></input>--></button>
+        <div class="content">
+            <div class="form-group">
+                <?php $timeArray = $view->userTimeArray;?>
+                <?php
+                if ( array_key_exists($user->getUserID(), $timeArray) || $level == 1 ) {
+                    //show the graph
+                    ?>
+                    <?php foreach ($timeArray[$user->getUserID()] as $tkey => $userData) {
+                        ?>
+                        <p> </p>
+                        <div class="chart-container">
+                            <?php $loop = $user->getUserID() . 't' . $tkey; ?>
+                            <canvas id="chart_<?php echo $loop; ?>"></canvas>
+
+                        </div>
+
+                        <script>
+                            var data = {
+                                labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+                                datasets: [{
+                                    label: "worked hours",
+                                    backgroundColor: "rgba(2,58,120,0.2)",
+                                    borderColor: "rgba(2,58,120,1)",
+                                    borderWidth: 1,
+                                    hoverBackgroundColor: "rgba(245,130,12,0.4)",
+                                    hoverBorderColor: "rgba(245,130,12,1)",
+                                    data: [<?php echo $userData;?>], //get the values from the controller
+                                }]
+                            };
+
+                            var option = {
+                                scales: {
+                                    yAxes: [{
+                                        stacked: true,
+                                        gridLines: {
+                                            display: true,
+                                            color: "rgba(102,102,102,0.2)"
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        gridLines: {
+                                            display: false
+                                        }
+                                    }]
+                                }
+                            };
+
+                            Chart.Bar('chart_<?php echo $loop;?>', {
+                                options: option,
+                                data: data
+                            });
+                            window.onload = function () {
+                                var ctx = document.getElementById('chart_<?php echo $loop;?>').getContext('2d');
+                                window.myBar = new Chart(ctx, {
+                                    type: 'bar',
+                                    data: barChartData,
+                                    options: {
+                                        responsive: true,
+                                        legend: {
+                                            position: 'top',
+                                        },
+                                        title: {
+                                            display: true,
+                                            text: 'Chart.js Bar Chart'
+                                        }
+                                    }
+                                });
+
+                            };
+                        </script>
+                        <a class="btn btn-primary btn-block" href="/tmp/<?php echo $view->timesheetArray[$tkey]->getFileLink();?>" role="button">Download Timesheet <?php echo $view->timesheetArray[$tkey]->getUplodeDate() ?> </a>
+                    <?php }
+                }?>
+            </div>
+        </div>
+        <p></p>
+    <?php }
+    //if my userID is in this project
+    ?>
+    <hr>
+    <button type="button" class="collapsible">Upload Timesheet</button>
+    <div class="content">
+        <div class="form-group">
+            <div class="row d-flex justify-content-center mt-100">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>File Upload</h5>
+                        </div>
+                        <div class="card-block">
+                            <form action="/Controller/parse_excel_file_modified.php" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['userID'];?>">
+                                <input type="hidden" name="project_id" value="<?php echo $view->projectID;?>">
+                                <input type="hidden" name="client_id" value="<?php echo $view->clientID;?>">
+                                <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+                                <br>
+                                <input type="file" name="excel_file" style="border: 2px dashed #023A78; height: 120px; padding: 1rem" accept=".xlsx" value="">
+                                <br>
+                                <p></p>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="all" value="all">
+                                    <label class="form-check-label" for="exampleCheck1">upload for project</label>
+                                </div>
+                                <p></p>
+                                <button class="btn1" type="submit" name="submit"><span class="glyphicon glyphicon-upload"></span> submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </tbody>
+<?php require('template/footer.phtml')?>

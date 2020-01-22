@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/css/my-style.css" rel="stylesheet">
+    <link href="/css/fonts.css" rel="stylesheet">
+    <title>KRM Timesheet - <?php echo $view->pageTitle; ?></title>
+</head>
+<body>
+<h1>KRM - Timesheet Manager</h1>
+
+<nav class="navbar navbar-expand-lg navbar-dark colour" style="margin:0px 0;">
+    <a class="navbar-brand" href ="../../index.php">
+        <img src="/images/krm-logo-1.png" alt="logo" style="width:100px;">
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navb">
+        <ul class="navbar-nav mr-auto">
+            <?php
+            if(isset($_SESSION['userID'])) // checks for active session
+            {
+            if ($_SESSION['userLevel'] == 1) //checks if user is admin
+            {
+            ?>
+            <a href="/create-project.php" class="nav-item nav-link">Create a Project</a>
+            <a href="/view-all-projects.php" class="nav-item nav-link">View all Project</a>
+        </ul>
+        <div>
+                    <a href="../../sign-up.php"><button type="button" class="btn btn-success" data-dismiss="modal"><span class="glyphicon glyphicon-user"></span> Register a user</button></a>
+                        <?php
+                } else {
+                }
+            }
+            if(isset($_SESSION['username']))
+            {?>
+                <a href="../../log-out.php"><button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-log-out"></span> Log Out</button></a>
+            <?php }
+            else
+            {
+            } ?>
+        </div>
+        </div>
+</nav>
+<div id="content">

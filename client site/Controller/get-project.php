@@ -30,7 +30,7 @@ $view->users = $userArray;
 //check if current user is in project
 $userInProject = false;
 foreach ($userArray as $user){
-    if ($user->getUserID ==  $ID){
+    if ($user->getUserID() ==  $ID){
         $userInProject = true;
     }
 }

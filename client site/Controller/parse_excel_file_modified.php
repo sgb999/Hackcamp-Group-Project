@@ -30,12 +30,18 @@ if (isset($_POST['submit'])) { //not returning true
 	    //echo $_POST['user_id'];
 	    //echo  $_POST['project_id'];
 	    //echo $_POST['client_id'];
+
 	    $projectID = $_POST['project_id']; //get from view/controller
 	    $userID = $_POST['user_id']; //get from view/controller
 	    $clientID = $_POST['client_id']; //get from view/controller
-
-	    // insert timesheet data into the database
-	    $timesheet->insertInDatabase($projectID, $userID, $clientID, $fileLink);
+        if ($_POST['all'] !== null){
+            $all = $_POST['all'];
+            //do this method
+        }
+        else {
+            // insert timesheet data into the database
+            $timesheet->insertInDatabase($projectID, $userID, $clientID, $fileLink);
+        }
 
 	} else {
 	  echo SimpleXLSX::parseError();

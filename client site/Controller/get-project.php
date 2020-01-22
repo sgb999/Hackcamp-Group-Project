@@ -55,9 +55,9 @@ foreach($graphUserArray as $user){
     // get timesheets
     $timesheets = $timesheetDataSet->fetchDataByUserAndProject($userID, $projectID);
 
-    foreach ($timesheets as $tkey => $timesheet){
+    foreach ($timesheets as $timesheet){
         //retrive file link
-        $timesheetFileLinkArray[$tkey] = $timesheet->getFileLink();
+        $timesheetFileLinkArray[$timesheet->getId()] = $timesheet->getFileLink();
 
         // create arrays for the distance and time
         $distanceArray = array_fill(1, 31, 0);

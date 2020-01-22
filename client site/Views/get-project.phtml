@@ -26,7 +26,7 @@
                     ?>
                     <?php foreach ($timeArray[$user->getUserID()] as $tkey => $userData) {
                         ?>
-                        <p></p>
+                        <p> </p>
                         <div class="chart-container">
                             <?php $loop = $user->getUserID() . 't' . $tkey; ?>
                             <canvas id="chart_<?php echo $loop; ?>"></canvas>
@@ -87,7 +87,7 @@
 
                             };
                         </script>
-                        <a class="btn btn-primary btn-block" href="/tmp/<?php echo $view->timesheetArray[$tkey]->getFileLink();?>" role="button">Download Timesheet</a>
+                        <a class="btn btn-primary btn-block" href="/tmp/<?php echo $view->timesheetArray[$tkey]->getFileLink();?>" role="button">Download Timesheet <?php echo $view->timesheetArray[$tkey]->getUplodeDate() ?> </a>
                     <?php }
                 }?>
             </div>

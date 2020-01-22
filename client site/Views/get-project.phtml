@@ -87,11 +87,7 @@
 
                             };
                         </script>
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                <input type="submit" class="btn btn-primary btn-block" value="Download user's timesheet" name="download">
-                    <?php if (isset($_POST['download']))
-                    ?>
-                </form>
+                        <a class="btn btn-primary btn-block" href="/tmp/<?php ;?>" role="button">Download Timesheet</a>
                     <?php }
                 }?>
             </div>
@@ -116,6 +112,11 @@
                                 <br>
                                 <input type="file" name="excel_file" style="border: 2px dashed #023A78; height: 120px; padding: 1rem" accept=".xlsx" value="">
                                 <br>
+                                <p></p>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="all">
+                                    <label class="form-check-label" for="exampleCheck1">upload for project</label>
+                                </div>
                                 <p></p>
                                 <button class="btn1" type="submit" name="submit"><span class="glyphicon glyphicon-upload"></span> submit</button>
                             </form>

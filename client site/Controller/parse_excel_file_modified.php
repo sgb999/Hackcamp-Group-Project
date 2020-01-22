@@ -5,7 +5,7 @@ require_once '../Models/ExcelTimesheetEntry.php';
 
 if (isset($_POST['submit'])) { //not returning true
 
-  $has_file = 1; //for testing set this once done //$_FILES['excel_file']['name'] != '' ? 1 : 0;
+  $has_file = $_FILES['excel_file']['name'] != '' ? 1 : 0;
 
   if ($has_file) {
 
@@ -19,19 +19,19 @@ if (isset($_POST['submit'])) { //not returning true
 	require $_SERVER['DOCUMENT_ROOT'] . '/lib/SimpleXLSX.php';
 
     //test to parse the excel file
-	$fileLink = 'tmp/timesheetLiam.xlsx'; //the excel file Kim gave us is an 'xls' not an 'xlsx', so I converted it in excel
+	$fileLink = "$basename.xlsx"; //the excel file Kim gave us is an 'xls' not an 'xlsx', so I converted it in excel
 
 	// once excel parsing works fine with timesheetLiam.xlsx, change
 	// the above $fileLink variable to $target instead of 'tmp/timesheetLiam.xlsx'
 	// like this: $fileLink = $target;
 
 	// if ( $xlsx = SimpleXLSX::parse($fileLink) )
-	if ( $timesheet = new ExcelTimesheet('../' . $fileLink) ) {
+	if ( $timesheet = new ExcelTimesheet('../tmp/'. $fileLink) ) {
 	    //echo $_POST['user_id'];
 	    //echo  $_POST['project_id'];
 	    //echo $_POST['client_id'];
-	    $projectID = $_POST['user_id']; //get from view/controller
-	    $userID = $_POST['project_id']; //get from view/controller
+	    $projectID = $_POST['project_id']; //get from view/controller
+	    $userID = $_POST['user_id']; //get from view/controller
 	    $clientID = $_POST['client_id']; //get from view/controller
 
 	    // insert timesheet data into the database
@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) { //not returning true
 	  echo SimpleXLSX::parseError();
 	}
 
-    header('Location: /../get-project.php?projectID='$_POST['project_id'];);
+    header('Location: /../get-project.php?projectID=' . $_POST['project_id']);
   }
 } else {
 
